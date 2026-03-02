@@ -49,12 +49,14 @@ function draw() {
   //   workbench.js     → drawWorkbench()
   //   oven.js          → drawOven()
   //   recipe.js        → drawRecipe()
+  //   end.js           → drawEnd()
 
   if (currentScreen === "home") drawHome();
   else if (currentScreen === "pantry") drawPantry();
   else if (currentScreen === "workbench") drawWorkbench();
   else if (currentScreen === "oven") drawOven();
   else if (currentScreen === "recipe") drawRecipe();
+  else if (currentScreen === "end") drawEnd();
 
   drawNavbar();
 }
@@ -70,12 +72,14 @@ function mousePressed() {
   // workbench.js     → workbenchMousePressed()
   // oven.js          → ovenMousePressed()
   // recipe.js          → recipeMousePressed()
+  // end.js          → endMousePressed()
 
   if (currentScreen === "home") homeMousePressed();
   else if (currentScreen === "pantry") pantryMousePressed();
   else if (currentScreen === "workbench") workbenchMousePressed();
   else if (currentScreen === "oven") ovenMousePressed();
   else if (currentScreen === "recipe") recipeMousePressed();
+  else if (currentScreen === "end") endMousePressed();
 
   navbarMousePressed();
 }
@@ -91,12 +95,14 @@ function keyPressed() {
   // workbench.js     → workbenchKeyPressed()
   // oven.js          → ovenKeyPressed()
   // recipe.js        → recipeKeyPressed()
+  // end.js           → endKeyPressed()
 
   if (currentScreen === "home") homeKeyPressed();
   else if (currentScreen === "pantry") pantryKeyPressed();
   else if (currentScreen === "workbench") workbenchKeyPressed();
   else if (currentScreen === "oven") ovenKeyPressed();
   else if (currentScreen === "recipe") recipeKeyPressed();
+  else if (currentScreen === "end") endKeyPressed();
 
   navbarKeyPressed();
 }

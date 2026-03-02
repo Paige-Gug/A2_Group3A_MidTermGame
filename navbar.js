@@ -62,6 +62,8 @@ function navbarMousePressed() {
   // Send the player to the recipe or end screens
   if (isHover(recipeBtn)) {
     currentScreen = "recipe";
+  } else if (isHover(endBtn)) {
+    currentScreen = "end";
   } else if (currentScreen !== "home" && isHover(homeBtn)) {
     currentScreen = "home";
   }
