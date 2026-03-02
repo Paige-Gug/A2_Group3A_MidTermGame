@@ -32,19 +32,6 @@ function drawPantry() {
 
   // ---- Back button ----
   // This button lets the player return to the home screen
-  const backBtn = {
-    x: width / 2, // centred horizontally
-    y: 560,
-    w: 220,
-    h: 70,
-    label: "BACK",
-  };
-
-  // Draw the back button
-  drawInstrButton(backBtn);
-
-  // Change cursor when hovering over the button
-  cursor(isHover(backBtn) ? HAND : ARROW);
 }
 
 // ------------------------------

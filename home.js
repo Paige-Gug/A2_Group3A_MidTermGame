@@ -16,38 +16,56 @@ function drawHome() {
 
   // ---- Title text ----
   fill(30, 50, 60);
-  textSize(46);
+  textSize(36);
   textAlign(CENTER, CENTER);
-  text("Win or Lose", width / 2, 180);
+  text("Pantry", width / 5, 180);
+
+  fill(30, 50, 60);
+  textSize(36);
+  textAlign(CENTER, CENTER);
+  text("Workbench", width / 2, 180);
+
+  fill(30, 50, 60);
+  textSize(36);
+  textAlign(CENTER, CENTER);
+  text("Oven", width - width / 5, 180);
 
   // ---- Buttons (data only) ----
   // These objects store the position/size/label for each button.
   // Using objects makes it easy to pass them into drawButton()
   // and also reuse the same information for hover checks.
-  const homeBtn = {
-    x: width / 2,
-    y: 320,
-    w: 240,
-    h: 80,
-    label: "home",
-  };
-
   const pantryBtn = {
-    x: width / 2,
-    y: 430,
+    x: width / 5,
+    y: 520,
     w: 240,
-    h: 80,
-    label: "INSTRUCTIONS",
+    h: 420,
+    label: "",
   };
 
-  // Draw both buttons
-  drawButton(homeBtn);
+  const workBtn = {
+    x: width / 2,
+    y: 570,
+    w: 340,
+    h: 320,
+    label: "",
+  };
+
+  const ovenBtn = {
+    x: width - width / 5,
+    y: 520,
+    w: 240,
+    h: 420,
+    label: "",
+  };
+
+  // Draw all buttons
   drawButton(pantryBtn);
+  drawButton(workBtn);
+  drawButton(ovenBtn);
 
   // ---- Cursor feedback ----
-  // If the mouse is over either button, show a hand cursor
-  // so the player knows it is clickable.
-  const over = isHover(homeBtn) || isHover(pantryBtn);
+  // If the mouse is over the buttons, show a hand cursor so the player knows it is clickable.
+  const over = isHover(workBtn) || isHover(pantryBtn) || isHover(ovenBtn);
   cursor(over ? HAND : ARROW);
 }
 
@@ -57,32 +75,21 @@ function drawHome() {
 // Called from main.js only when currentScreen === "home"
 function homeMousePressed() {
   // For input checks, we only need x,y,w,h (label is optional)
-  const homeBtn = { x: width / 2, y: 320, w: 240, h: 80 };
-  const pantryBtn = { x: width / 2, y: 430, w: 240, h: 80 };
+  const pantryBtn = { x: width / 5, y: 520, w: 240, h: 420 };
+  const workBtn = { x: width / 2, y: 570, w: 340, h: 320 };
+  const ovenBtn = { x: width - width / 5, y: 520, w: 240, h: 420 };
 
-  // If HOME is clicked, stay on the home screen (no change needed)
-  if (isHover(homeBtn)) {
-    currentScreen = "home";
+  // If workbench is clicked, go to the workbench screen
+  if (isHover(workBtn)) {
+    currentScreen = "workbench";
   }
   // If INSTRUCTIONS is clicked, go to the instructions screen
   else if (isHover(pantryBtn)) {
     currentScreen = "pantry";
   }
-}
-
-// ------------------------------------------------------------
-// Keyboard input for the home screen
-// ------------------------------------------------------------
-// Provides keyboard shortcuts:
-// - ENTER starts the game
-// - I opens instructions
-function homeKeyPressed() {
-  if (keyCode === ENTER) {
-    currentScreen = "game";
-  }
-
-  if (key === "i" || key === "I") {
-    currentScreen = "pantry";
+  // If OVEN is clicked, go to the oven screen
+  else if (isHover(ovenBtn)) {
+    currentScreen = "oven";
   }
 }
 

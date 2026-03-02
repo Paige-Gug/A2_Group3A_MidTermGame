@@ -1,7 +1,7 @@
 // NOTE: Do NOT add setup() or draw() in this file
 // setup() and draw() live in main.js
 // This file only defines:
-// 1) drawGame() → what the game screen looks like
+// 1) drawWorkbench() → what the workbench screen looks like
 // 2) input handlers → what happens when the player clicks or presses keys
 // 3) helper functions specific to this screen
 
@@ -9,10 +9,10 @@
 // Button data
 // ------------------------------
 // This object stores all the information needed to draw
-// and interact with the button on the game screen.
+// and interact with the button on the workbenchscreen.
 // Keeping this in one object makes it easier to move,
 // resize, or restyle the button later.
-const gameBtn = {
+const workBtn = {
   x: 400, // x position (centre of the button)
   y: 550, // y position (centre of the button)
   w: 260, // width
@@ -24,16 +24,16 @@ const gameBtn = {
 // Main draw function for this screen
 // ------------------------------
 // drawGame() is called from main.js *only*
-// when currentScreen === "game"
-function drawGame() {
-  // Set background colour for the game screen
+// when currentScreen === "workbench"
+function drawWorkbench() {
+  // Set background colour for the workbench screen
   background(240, 230, 140);
 
   // ---- Title and instructions text ----
   fill(0); // black text
   textSize(32);
   textAlign(CENTER, CENTER);
-  text("Game Screen", width / 2, 160);
+  text("Workbench Screen", width / 2, 160);
 
   textSize(18);
   text(
@@ -44,12 +44,12 @@ function drawGame() {
 
   // ---- Draw the button ----
   // We pass the button object to a helper function
-  drawGameButton(gameBtn);
+  drawWorkbenchButton(workBtn);
 
   // ---- Cursor feedback ----
   // If the mouse is over the button, show a hand cursor
   // Otherwise, show the normal arrow cursor
-  cursor(isHover(gameBtn) ? HAND : ARROW);
+  cursor(isHover(workBtn) ? HAND : ARROW);
 }
 
 // ------------------------------
@@ -57,7 +57,7 @@ function drawGame() {
 // ------------------------------
 // This function is responsible *only* for drawing the button.
 // It does NOT handle clicks or game logic.
-function drawGameButton({ x, y, w, h, label }) {
+function drawWorkbenchButton({ x, y, w, h, label }) {
   rectMode(CENTER);
 
   // Check if the mouse is hovering over the button
@@ -88,10 +88,10 @@ function drawGameButton({ x, y, w, h, label }) {
 // Mouse input for this screen
 // ------------------------------
 // This function is called from main.js
-// only when currentScreen === "game"
-function gameMousePressed() {
+// only when currentScreen === "workbench"
+function workbenchMousePressed() {
   // Only trigger the outcome if the button is clicked
-  if (isHover(gameBtn)) {
+  if (isHover(workBtn)) {
     triggerRandomOutcome();
   }
 }
@@ -100,16 +100,13 @@ function gameMousePressed() {
 // Keyboard input for this screen
 // ------------------------------
 // Allows keyboard-only interaction (accessibility + design)
-function gameKeyPressed() {
+function workbenchKeyPressed() {
   // ENTER key triggers the same behaviour as clicking the button
   if (keyCode === ENTER) {
     triggerRandomOutcome();
   }
 }
 
-// ------------------------------
-// Game logic: win or lose
-// ------------------------------
 // This function decides what happens next in the game.
 // It does NOT draw anything.
 function triggerRandomOutcome() {

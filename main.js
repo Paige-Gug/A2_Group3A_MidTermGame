@@ -21,14 +21,16 @@
 //
 // We store the “name” of the current screen as a string.
 // Only one screen should be active at a time.
-let currentScreen = "start"; // "start" | "instr" | "game" | "win" | "lose"
+let currentScreen = "home"; // "home" | "pantry" | "workbench" | "oven" | "recipe"
+let bread = 0; // game state variable to track how many breads the player has (starts at 0)
+let energy = 90; // game state variable to track the player's energy (starts at 90)
 
 // ------------------------------
 // setup() runs ONCE at the beginning
 // ------------------------------
 // This is where you usually set canvas size and initial settings.
 function setup() {
-  createCanvas(800, 800);
+  createCanvas(1344, 756);
 
   // Sets a default font for all text() calls
   // (This can be changed later per-screen if you want.)
@@ -42,23 +44,19 @@ function setup() {
 // Depending on currentScreen, we call the correct draw function.
 function draw() {
   // Each screen file defines its own draw function:
-  //   start.js         → drawStart()
-  //   instructions.js  → drawInstr()
-  //   game.js          → drawGame()
-  //   win.js           → drawWin()
-  //   lose.js          → drawLose()
+  //   home.js         → drawHome()
+  //   pantry.js       → drawPantry()
+  //   workbench.js     → drawWorkbench()
+  //   oven.js          → drawOven()
+  //   recipe.js        → drawRecipe()
 
-  if (currentScreen === "start") drawStart();
-  else if (currentScreen === "instr") drawInstr();
-  else if (currentScreen === "game") drawGame();
-  else if (currentScreen === "win") drawWin();
-  else if (currentScreen === "lose") drawLose();
+  if (currentScreen === "home") drawHome();
+  else if (currentScreen === "pantry") drawPantry();
+  else if (currentScreen === "workbench") drawWorkbench();
+  else if (currentScreen === "oven") drawOven();
+  else if (currentScreen === "recipe") drawRecipe();
 
-  // (Optional teaching note)
-  // This “if/else chain” is a very common early approach.
-  // Later in the course you might replace it with:
-  // - a switch statement, or
-  // - an object/map of screens
+  drawNavbar();
 }
 
 // ------------------------------
@@ -67,19 +65,19 @@ function draw() {
 // This routes mouse input to the correct screen handler.
 function mousePressed() {
   // Each screen *may* define a mouse handler:
-  // start.js         → startMousePressed()
-  // instructions.js  → instrMousePressed()
-  // game.js          → gameMousePressed()
-  // win.js           → winMousePressed()
-  // lose.js          → loseMousePressed()
+  // home.js         → homeMousePressed()
+  // pantry.js       → pantryMousePressed()
+  // workbench.js     → workbenchMousePressed()
+  // oven.js          → ovenMousePressed()
+  // recipe.js          → recipeMousePressed()
 
-  if (currentScreen === "start") startMousePressed();
-  else if (currentScreen === "instr") instrMousePressed();
-  else if (currentScreen === "game") gameMousePressed();
-  // The ?.() means “call this function only if it exists”
-  // This prevents errors if a screen doesn’t implement a handler.
-  else if (currentScreen === "win") winMousePressed?.();
-  else if (currentScreen === "lose") loseMousePressed?.();
+  if (currentScreen === "home") homeMousePressed();
+  else if (currentScreen === "pantry") pantryMousePressed();
+  else if (currentScreen === "workbench") workbenchMousePressed();
+  else if (currentScreen === "oven") ovenMousePressed();
+  else if (currentScreen === "recipe") recipeMousePressed();
+
+  navbarMousePressed();
 }
 
 // ------------------------------
@@ -88,17 +86,19 @@ function mousePressed() {
 // This routes keyboard input to the correct screen handler.
 function keyPressed() {
   // Each screen *may* define a key handler:
-  // start.js         → startKeyPressed()
-  // instructions.js  → instrKeyPressed()
-  // game.js          → gameKeyPressed()
-  // win.js           → winKeyPressed()
-  // lose.js          → loseKeyPressed()
+  // home.js         → homeKeyPressed()
+  // pantry.js       → pantryKeyPressed()
+  // workbench.js     → workbenchKeyPressed()
+  // oven.js          → ovenKeyPressed()
+  // recipe.js        → recipeKeyPressed()
 
-  if (currentScreen === "start") startKeyPressed();
-  else if (currentScreen === "instr") instrKeyPressed();
-  else if (currentScreen === "game") gameKeyPressed?.();
-  else if (currentScreen === "win") winKeyPressed?.();
-  else if (currentScreen === "lose") loseKeyPressed?.();
+  if (currentScreen === "home") homeKeyPressed();
+  else if (currentScreen === "pantry") pantryKeyPressed();
+  else if (currentScreen === "workbench") workbenchKeyPressed();
+  else if (currentScreen === "oven") ovenKeyPressed();
+  else if (currentScreen === "recipe") recipeKeyPressed();
+
+  navbarKeyPressed();
 }
 
 // ------------------------------------------------------------
