@@ -36,7 +36,7 @@ let saltCounter = 0;
 // This is where you usually set canvas size and initial settings.
 function setup() {
   createCanvas(1344, 756);
-
+  energy = int(random(70, 98)); // start with random energy between 70 and 98
   // Sets a default font for all text() calls
   // (This can be changed later per-screen if you want.)
   textFont("sans-serif");

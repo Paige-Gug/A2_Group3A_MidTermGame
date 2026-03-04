@@ -21,10 +21,7 @@ function drawOven() {
   fill(0);
   textAlign(CENTER, CENTER);
 
-  textSize(40);
-  text("oven!", width / 2, 100);
-
-  textSize(20);
+  textSize(30);
   text("Click the bread to put it in the oven", width / 2, 160);
 
   // Draw oven
@@ -65,6 +62,9 @@ function drawOven() {
     textSize(50);
     fill(0, 150, 0); // green
     text("Done!", width / 2, 30);
+    bread = bread + 1; // increase bread count when done
+    breadDone = false; // reset "done" message until next time
+    currentScreen = "end"; // go to end screen after bread is done
   }
 }
 
