@@ -10,10 +10,6 @@
 // ------------------------------
 // drawPantry() is called from main.js
 // only when currentScreen === "pantry"
-let flourCounter = 0;
-let waterCounter = 0;
-let starterCounter = 0;
-let saltCounter = 0;
 
 function drawPantry() {
   // Light neutral background
