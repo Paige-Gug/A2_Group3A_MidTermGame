@@ -24,6 +24,11 @@
 let currentScreen = "home"; // "home" | "pantry" | "workbench" | "oven" | "recipe"
 let bread = 0; // game state variable to track how many breads the player has (starts at 0)
 let energy = 90; // game state variable to track the player's energy (starts at 90)
+// Ingredient counters (start at 0, increase when player clicks on ingredient in pantry)
+let flourCounter = 0;
+let waterCounter = 0;
+let starterCounter = 0;
+let saltCounter = 0;
 
 // ------------------------------
 // setup() runs ONCE at the beginning
