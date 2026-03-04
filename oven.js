@@ -10,9 +10,9 @@
 // drawOven() is called from main.js
 // only when currentScreen === "oven"
 let breadInOven = false;
-let bakeTimer = 0;          // counts frames while bread is in oven
-let bakeDuration = 300;     // 5 seconds at 60 FPS
-let breadDone = false;      // tracks if bread just finished
+let bakeTimer = 0; // counts frames while bread is in oven
+let bakeDuration = 300; // 5 seconds at 60 FPS
+let breadDone = false; // tracks if bread just finished
 
 function drawOven() {
   // Green-tinted background
@@ -25,7 +25,11 @@ function drawOven() {
   text("oven!", width / 2, 100);
 
   textSize(20);
-  text("Click the bread to put it in the oven, or press R to return.", width / 2, 160);
+  text(
+    "Click the bread to put it in the oven, or press R to return.",
+    width / 2,
+    160,
+  );
 
   // Draw oven
   rectMode(CENTER);
@@ -91,5 +95,5 @@ function ovenMousePressed() {
 
 // Keyboard input
 function ovenKeyPressed() {
-  if (key === 'r' || key === 'R') currentScreen = "start";
+  if (key === "r" || key === "R") currentScreen = "start";
 }
