@@ -25,11 +25,7 @@ function drawOven() {
   text("oven!", width / 2, 100);
 
   textSize(20);
-  text(
-    "Click the bread to put it in the oven, or press R to return.",
-    width / 2,
-    160,
-  );
+  text("Click the bread to put it in the oven", width / 2, 160);
 
   // Draw oven
   rectMode(CENTER);
