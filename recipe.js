@@ -23,10 +23,10 @@ function drawRecipe() {
   // Ingredients
   textSize(30);
   text("Ingredients:", width / 3, 325);
-  text("- Flour: " + flourCounter, width / 3, 375);
-  text("- Water: " + waterCounter, width / 3, 425);
-  text("- Starter: " + starterCounter, width / 3, 475);
-  text("- Salt: " + saltCounter, width / 3, 525);
+  text("- Flour: " + flourCounter + "/3", width / 3, 375);
+  text("- Water: " + waterCounter + "/2", width / 3, 425);
+  text("- Starter: " + starterCounter + "/1", width / 3, 475);
+  text("- Salt: " + saltCounter + "/1", width / 3, 525);
 }
 
 // ------------------------------
