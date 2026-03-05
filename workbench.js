@@ -299,7 +299,7 @@ function wbCheckRecipe() {
     else if (have > needed) excess.push(INGREDIENT_STYLES[name].label);
   }
   if (missing.length === 0 && excess.length === 0) {
-    currentScreen = "win";
+    currentScreen = "oven";
   } else if (missing.length > 0) {
     wbMessage = `Missing: ${missing.join(", ")}`;
     wbMessageTimer = 140;
