@@ -68,6 +68,7 @@ function draw() {
   if (currentScreen === "workbench" && prevScreen !== "workbench") {
     initWorkbench();
   }
+  prevScreen = currentScreen;
 
   drawNavbar();
 }
