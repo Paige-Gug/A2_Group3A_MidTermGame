@@ -29,6 +29,7 @@ let flourCounter = 0;
 let waterCounter = 0;
 let starterCounter = 0;
 let saltCounter = 0;
+let prevScreen = "home";
 
 // ------------------------------
 // setup() runs ONCE at the beginning
@@ -40,6 +41,7 @@ function setup() {
   // Sets a default font for all text() calls
   // (This can be changed later per-screen if you want.)
   textFont("sans-serif");
+  initWorkbench();
 }
 
 // ------------------------------
@@ -62,6 +64,10 @@ function draw() {
   else if (currentScreen === "oven") drawOven();
   else if (currentScreen === "recipe") drawRecipe();
   else if (currentScreen === "end") drawEnd();
+
+  if (currentScreen === "workbench" && prevScreen !== "workbench") {
+    initWorkbench();
+  }
 
   drawNavbar();
 }
@@ -110,6 +116,14 @@ function keyPressed() {
   else if (currentScreen === "end") endKeyPressed();
 
   navbarKeyPressed();
+}
+
+function mouseDragged() {
+  if (currentScreen === "workbench") workbenchMouseDragged();
+}
+
+function mouseReleased() {
+  if (currentScreen === "workbench") workbenchMouseReleased();
 }
 
 // ------------------------------------------------------------
