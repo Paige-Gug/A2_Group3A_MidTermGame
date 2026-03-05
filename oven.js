@@ -84,12 +84,8 @@ function ovenMousePressed() {
     breadInOven = true;
     bakeTimer = 0;
     breadDone = false; // reset "done" message when new bread is baking
+    energy = energy - int(random(0, 4));
   } else {
     currentScreen = "start";
   }
-}
-
-// Keyboard input
-function ovenKeyPressed() {
-  if (key === "r" || key === "R") currentScreen = "start";
 }
