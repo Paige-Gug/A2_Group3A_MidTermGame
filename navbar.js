@@ -54,9 +54,10 @@ function drawNavbar() {
   };
 
   // Draw the buttons on the navbar
-  drawButton(homeBtn);
-  drawButton(recipeBtn);
-  drawButton(endBtn);
+  const disabled = currentScreen === "sleep";
+  drawButton(homeBtn, disabled);
+  drawButton(recipeBtn, disabled);
+  drawButton(endBtn, disabled);
 }
 
 // ------------------------------------------------------------
@@ -64,6 +65,8 @@ function drawNavbar() {
 // ------------------------------------------------------------
 // Called from main.js on every mouse click, regardless of the current screen
 function navbarMousePressed() {
+  if (currentScreen === "sleep") return; // buttons are disabled on sleep screen
+
   const recipeBtn = { x: width - 210, y: 90, w: 370, h: 50 };
   const endBtn = { x: 260, y: 90, w: 170, h: 50 };
   const homeBtn = { x: 100, y: 90, w: 150, h: 50 };

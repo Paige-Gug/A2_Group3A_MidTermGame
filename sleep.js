@@ -12,20 +12,12 @@
 function drawSleep() {
   background(29, 24, 74);
 
-  fill(0);
-  textAlign(LEFT, CENTER);
+  fill(255);
+  textAlign(CENTER);
 
   // Bread type
   textSize(40);
-  text("Sourdough!", width / 3, 250);
-
-  // Ingredients
-  textSize(30);
-  text("Ingredients:", width / 3, 325);
-  text("- Flour: " + flourCounter + "/3", width / 3, 375);
-  text("- Water: " + waterCounter + "/2", width / 3, 425);
-  text("- Starter: " + starterCounter + "/1", width / 3, 475);
-  text("- Salt: " + saltCounter + "/1", width / 3, 525);
+  text("One day closer to culinary school!", width / 2, height / 2);
 }
 
 // ------------------------------
@@ -33,16 +25,3 @@ function drawSleep() {
 // ------------------------------
 // Any mouse click returns the player to the start screen
 // (no buttons needed for this simple end state)
-function sleepMousePressed() {
-  currentScreen = "start";
-}
-
-// ------------------------------
-// Keyboard input for recipe screen
-// ------------------------------
-// R is commonly used for “restart” in games
-function sleepKeyPressed() {
-  if (key === "r" || key === "R") {
-    currentScreen = "start";
-  }
-}

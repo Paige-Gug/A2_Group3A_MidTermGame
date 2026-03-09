@@ -87,6 +87,10 @@ function draw() {
   prevScreen = currentScreen;
 
   drawNavbar();
+
+  if (energy <= 4) {
+    currentScreen = "sleep";
+  }
 }
 
 // ------------------------------

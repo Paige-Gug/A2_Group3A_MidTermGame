@@ -103,7 +103,7 @@ function homeMousePressed() {
 // That logic lives in homeMousePressed() above.
 //
 // Keeping drawing separate from input/logic makes code easier to read.
-function drawButton({ x, y, w, h, label }) {
+function drawButton({ x, y, w, h, label }, disabled = false) {
   rectMode(CENTER);
 
   // Check if the mouse is over the button rectangle
@@ -118,7 +118,10 @@ function drawButton({ x, y, w, h, label }) {
   //
   // We also add a shadow using drawingContext (p5 lets you access the
   // underlying canvas context for effects like shadows).
-  if (hover) {
+  if (disabled) {
+    fill(200, 200, 200, label ? 255 : 0); // grey for disabled buttons
+    drawingContext.shadowBlur = 0; // no shadow for disabled
+  } else if (hover) {
     fill(202, 227, 235, label ? 255 : 0); // warm coral on hover, visible for navbar buttons
 
     // Shadow settings (only when hovered)
