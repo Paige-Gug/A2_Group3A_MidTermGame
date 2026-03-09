@@ -44,6 +44,9 @@ function preload() {
     allimg.push(name);
   }
 
+  // Load the intro video
+  video = createVideo("libraries/assets/intro.mp4");
+
   // Load a custom font before the sketch starts
   font = loadFont("libraries/assets/font/playpen.ttf");
 }
@@ -61,8 +64,9 @@ function setup() {
   textFont(font);
   initWorkbench();
 
-  video = createVideo("libraries/assets/intro.mp4");
   video.hide();
+  video.size(width, height);
+  video.elt.muted = true; // Allow autoplay by muting the video
   video.onended(() => {
     videoFinished = true;
     currentScreen = "home"; // Ensure we switch to the home screen after the video ends

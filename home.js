@@ -19,8 +19,9 @@ function drawHome() {
     }
     image(video, 0, 0, width, height);
   } else {
+    imageMode(CORNER);
     // Background colour for the home screen
-    image(allimg[0], width / 2, height / 2, width, height); // background image
+    image(allimg[0], 0, 0, width, height); // background image
 
     // ---- Title text ----
     fill(255);
