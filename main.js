@@ -27,6 +27,9 @@ let energy = 90; // game state variable to track the player's energy (starts at 
 let allimg = []; // global array to store all loaded images (populated in preload())
 let font; // global variable to store the loaded font (populated in preload())
 let prevScreen = "home";
+let video;
+let playing = false; // track if the intro video is currently playing
+let videoFinished = false; // track if the intro video has finished playing
 
 // Ingredient counters (start at 0, increase when player clicks on ingredient in pantry)
 let flourCounter = 0;
@@ -57,6 +60,13 @@ function setup() {
   fill(84, 43, 20);
   textFont(font);
   initWorkbench();
+
+  video = createVideo("libraries/assets/intro.mp4");
+  video.hide();
+  video.onended(() => {
+    videoFinished = true;
+    currentScreen = "home"; // Ensure we switch to the home screen after the video ends
+  });
 }
 
 // ------------------------------
@@ -72,6 +82,7 @@ function draw() {
   //   oven.js          → drawOven()
   //   recipe.js        → drawRecipe()
   //   end.js           → drawEnd()
+  //   sleep.js         → drawSleep()
 
   if (currentScreen === "home") drawHome();
   else if (currentScreen === "pantry") drawPantry();
@@ -86,7 +97,10 @@ function draw() {
   }
   prevScreen = currentScreen;
 
-  drawNavbar();
+  // Only draw navbar if video has finished playing
+  if (videoFinished) {
+    drawNavbar();
+  }
 
   if (energy <= 4) {
     currentScreen = "sleep";
