@@ -25,20 +25,24 @@ let currentScreen = "home"; // "home" | "pantry" | "workbench" | "oven" | "recip
 let bread = 0; // game state variable to track how many breads the player has (starts at 0)
 let energy = 90; // game state variable to track the player's energy (starts at 90)
 let allimg = []; // global array to store all loaded images (populated in preload())
+let font; // global variable to store the loaded font (populated in preload())
+let prevScreen = "home";
 
 // Ingredient counters (start at 0, increase when player clicks on ingredient in pantry)
 let flourCounter = 0;
 let waterCounter = 0;
 let starterCounter = 0;
 let saltCounter = 0;
-let prevScreen = "home";
 
 // Load all images
 function preload() {
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 33; i++) {
     let name = loadImage(`libraries/assets/images/${i}.png`);
     allimg.push(name);
   }
+
+  // Load a custom font before the sketch starts
+  font = loadFont("libraries/assets/font/playpen.ttf");
 }
 
 // ------------------------------
@@ -50,7 +54,8 @@ function setup() {
   energy = int(random(70, 98)); // start with random energy between 70 and 98
   // Sets a default font for all text() calls
   // (This can be changed later per-screen if you want.)
-  textFont("sans-serif");
+  fill(84, 43, 20);
+  textFont(font);
   initWorkbench();
 }
 
@@ -74,6 +79,7 @@ function draw() {
   else if (currentScreen === "oven") drawOven();
   else if (currentScreen === "recipe") drawRecipe();
   else if (currentScreen === "end") drawEnd();
+  else if (currentScreen === "sleep") drawSleep();
 
   if (currentScreen === "workbench" && prevScreen !== "workbench") {
     initWorkbench();
@@ -102,6 +108,7 @@ function mousePressed() {
   else if (currentScreen === "oven") ovenMousePressed();
   else if (currentScreen === "recipe") recipeMousePressed();
   else if (currentScreen === "end") endMousePressed();
+  else if (currentScreen === "sleep") sleepMousePressed();
 
   navbarMousePressed();
 }
@@ -125,6 +132,7 @@ function keyPressed() {
   else if (currentScreen === "oven") ovenKeyPressed();
   else if (currentScreen === "recipe") recipeKeyPressed();
   else if (currentScreen === "end") endKeyPressed();
+  else if (currentScreen === "sleep") sleepKeyPressed();
 
   navbarKeyPressed();
 }

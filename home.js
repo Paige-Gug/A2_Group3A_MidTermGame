@@ -15,19 +15,13 @@ function drawHome() {
   image(allimg[0], width / 2, height / 2, width, height); // background image
 
   // ---- Title text ----
-  fill(30, 50, 60);
-  textSize(36);
+  fill(255);
+  stroke(84, 43, 20);
+  strokeWeight(5);
+  textSize(30);
   textAlign(CENTER, CENTER);
   text("Pantry", 315, 200);
-
-  fill(30, 50, 60);
-  textSize(36);
-  textAlign(CENTER, CENTER);
   text("Workbench", 710, 300);
-
-  fill(30, 50, 60);
-  textSize(36);
-  textAlign(CENTER, CENTER);
   text("Oven", 1075, 200);
 
   // ---- Buttons (data only) ----
@@ -125,17 +119,17 @@ function drawButton({ x, y, w, h, label }) {
   // We also add a shadow using drawingContext (p5 lets you access the
   // underlying canvas context for effects like shadows).
   if (hover) {
-    fill(255, 200, 150, 0); // warm coral on hover
+    fill(202, 227, 235, label ? 255 : 0); // warm coral on hover, visible for navbar buttons
 
     // Shadow settings (only when hovered)
     drawingContext.shadowBlur = 20;
-    drawingContext.shadowColor = color(255, 180, 120);
+    drawingContext.shadowColor = color(242, 248, 250);
   } else {
-    fill(255, 240, 210, 0); // soft cream base
+    fill(255, 240, 210, label ? 255 : 0); // soft cream base, visible for navbar buttons
 
     // Softer shadow when not hovered
     drawingContext.shadowBlur = 8;
-    drawingContext.shadowColor = color(220, 220, 220);
+    drawingContext.shadowColor = color(242, 248, 250);
   }
 
   // Draw the rounded rectangle button
