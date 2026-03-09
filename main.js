@@ -24,12 +24,22 @@
 let currentScreen = "home"; // "home" | "pantry" | "workbench" | "oven" | "recipe"
 let bread = 0; // game state variable to track how many breads the player has (starts at 0)
 let energy = 90; // game state variable to track the player's energy (starts at 90)
+let allimg = []; // global array to store all loaded images (populated in preload())
+
 // Ingredient counters (start at 0, increase when player clicks on ingredient in pantry)
 let flourCounter = 0;
 let waterCounter = 0;
 let starterCounter = 0;
 let saltCounter = 0;
 let prevScreen = "home";
+
+// Load all images
+function preload() {
+  for (let i = 0; i < 3; i++) {
+    let name = loadImage(`libraries/assets/images/${i}.png`);
+    allimg.push(name);
+  }
+}
 
 // ------------------------------
 // setup() runs ONCE at the beginning

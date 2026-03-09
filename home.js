@@ -12,49 +12,49 @@
 // currentScreen === "home"
 function drawHome() {
   // Background colour for the home screen
-  background(180, 225, 220); // soft teal background
+  image(allimg[0], width / 2, height / 2, width, height); // background image
 
   // ---- Title text ----
   fill(30, 50, 60);
   textSize(36);
   textAlign(CENTER, CENTER);
-  text("Pantry", width / 5, 180);
+  text("Pantry", 315, 200);
 
   fill(30, 50, 60);
   textSize(36);
   textAlign(CENTER, CENTER);
-  text("Workbench", width / 2, 180);
+  text("Workbench", 710, 300);
 
   fill(30, 50, 60);
   textSize(36);
   textAlign(CENTER, CENTER);
-  text("Oven", width - width / 5, 180);
+  text("Oven", 1075, 200);
 
   // ---- Buttons (data only) ----
   // These objects store the position/size/label for each button.
   // Using objects makes it easy to pass them into drawButton()
   // and also reuse the same information for hover checks.
   const pantryBtn = {
-    x: width / 5,
-    y: 520,
+    x: 315,
+    y: 475,
     w: 240,
     h: 420,
     label: "",
   };
 
   const workBtn = {
-    x: width / 2,
-    y: 570,
+    x: 710,
+    y: 600,
     w: 340,
-    h: 320,
+    h: 240,
     label: "",
   };
 
   const ovenBtn = {
-    x: width - width / 5,
-    y: 520,
+    x: 1075,
+    y: 565,
     w: 240,
-    h: 420,
+    h: 280,
     label: "",
   };
 
@@ -62,6 +62,14 @@ function drawHome() {
   drawButton(pantryBtn);
   drawButton(workBtn);
   drawButton(ovenBtn);
+
+  // show pantry image when hovered
+  imageMode(CENTER);
+  if (isHover(pantryBtn)) {
+    image(allimg[1], 325, 485, 420, 550);
+  } else if (isHover(ovenBtn)) {
+    image(allimg[2], 1070, 580, 325, 380);
+  }
 
   // ---- Cursor feedback ----
   // If the mouse is over the buttons, show a hand cursor so the player knows it is clickable.
@@ -75,15 +83,15 @@ function drawHome() {
 // Called from main.js only when currentScreen === "home"
 function homeMousePressed() {
   // For input checks, we only need x,y,w,h (label is optional)
-  const pantryBtn = { x: width / 5, y: 520, w: 240, h: 420 };
-  const workBtn = { x: width / 2, y: 570, w: 340, h: 320 };
-  const ovenBtn = { x: width - width / 5, y: 520, w: 240, h: 420 };
+  const pantryBtn = { x: 315, y: 475, w: 240, h: 420 };
+  const workBtn = { x: 710, y: 600, w: 340, h: 240 };
+  const ovenBtn = { x: 1075, y: 565, w: 240, h: 280 };
 
   // If workbench is clicked, go to the workbench screen
   if (isHover(workBtn)) {
     currentScreen = "workbench";
   }
-  // If INSTRUCTIONS is clicked, go to the instructions screen
+  // If pantry is clicked, go to the pantry screen
   else if (isHover(pantryBtn)) {
     currentScreen = "pantry";
   }
@@ -117,13 +125,13 @@ function drawButton({ x, y, w, h, label }) {
   // We also add a shadow using drawingContext (p5 lets you access the
   // underlying canvas context for effects like shadows).
   if (hover) {
-    fill(255, 200, 150, 220); // warm coral on hover
+    fill(255, 200, 150, 0); // warm coral on hover
 
     // Shadow settings (only when hovered)
     drawingContext.shadowBlur = 20;
     drawingContext.shadowColor = color(255, 180, 120);
   } else {
-    fill(255, 240, 210, 210); // soft cream base
+    fill(255, 240, 210, 0); // soft cream base
 
     // Softer shadow when not hovered
     drawingContext.shadowBlur = 8;
