@@ -37,13 +37,19 @@ function initWorkbench() {
   wbIngredients = [];
   const names = Object.keys(INGREDIENT_STYLES);
   names.forEach((name, i) => {
+    const pantryCount = {
+      flour: flourCounter,
+      water: waterCounter,
+      starter: starterCounter,
+      salt: saltCounter,
+    };
     wbIngredients.push({
       name,
       x: 100 + i * 130,
       y: height * 0.8,
       w: 100,
       h: 100,
-      count: 3,
+      count: pantryCount[name] || 0,
     });
   });
 }
@@ -123,7 +129,7 @@ function drawWbToken(x, y, w, h, name, count) {
   const empty = count <= 0;
   const img = allimg[style.imgIndex];
 
-  // Bowl-coloured background box (matches the pink bowl)
+  // Bowl-coloured background box
   rectMode(CENTER);
   fill(empty ? color(210, 200, 200) : color(232, 185, 185));
   stroke(190, 140, 140);
@@ -266,7 +272,6 @@ function drawWbBakeButton() {
   const btn = wbGetBtn();
   const hover = isHover(btn);
 
-  // Draw using CENTER mode — matches isHover which uses center coords
   rectMode(CENTER);
   fill(hover ? color(90, 175, 65) : color(70, 150, 50));
   stroke(40, 100, 30);
@@ -416,6 +421,7 @@ function wbCheckRecipe() {
   }
   if (missing.length === 0 && excess.length === 0) {
     currentScreen = "oven";
+    ingredientsDone = true; // set global variable to true so oven screen can check
   } else if (missing.length > 0) {
     wbMessage = `Missing: ${missing.join(", ")}`;
     wbMessageTimer = 140;

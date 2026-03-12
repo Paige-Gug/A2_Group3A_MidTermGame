@@ -10,23 +10,20 @@
 // drawOven() is called from main.js
 // only when currentScreen === "oven"
 let breadInOven = false;
-let bakeTimer = 0;       // counts frames while bread is in oven
-let bakeDuration = 300;  // 5 seconds at 60 FPS
-let breadDone = false;   // tracks if bread just finished
-let warningMessage = ""; // warning if ingredients not ready
-
-let ingredientsDone = true; // DELETE THIS WHEN MOVED TO INGRIDIENTS SCREEN
+let bakeTimer = 0; // counts frames while bread is in oven
+let bakeDuration = 300; // 5 seconds at 60 FPS
+let breadDone = false; // tracks if bread just finished
+let warningMessage = "You need to complete all ingredients first!"; // warning if ingredients not ready
 
 let breadDoneTimer = 0; // counts frames after baking finishes
-let breadDoneDelay = 240; // show baked bread for 2 seconds (120 frames at 60 FPS)
-
+let breadDoneDelay = 200; // show baked bread for 2 seconds (120 frames at 60 FPS)
 
 function drawOven() {
-  ovenClosedImg  = allimg[12]; // closed oven
-  ovenBakingImg    = allimg[32]; // open oven
-  ovenOpenImg    = allimg[2]; // open oven
-  breadImg       = allimg[7];  // raw bread
-  bakedBreadImg  = allimg[15]; // baked bread
+  ovenClosedImg = allimg[12]; // closed oven
+  ovenBakingImg = allimg[32]; // open oven
+  ovenOpenImg = allimg[2]; // open oven
+  breadImg = allimg[7]; // raw bread
+  bakedBreadImg = allimg[15]; // baked bread
   ovenBackground = allimg[31]; // oven background
 
   // ------------------------------
@@ -47,15 +44,15 @@ function drawOven() {
   // Oven image
   // ------------------------------
   let ovenY = height / 2 + 120;
- let ovenImg;
+  let ovenImg;
 
-if (breadInOven) {
-  ovenImg = ovenBakingImg;   // baking image
-} else if (breadDone) {
-  ovenImg = ovenOpenImg;     // open oven when finished
-} else {
-  ovenImg = ovenClosedImg;   // closed at start
-}
+  if (breadInOven) {
+    ovenImg = ovenBakingImg; // baking image
+  } else if (breadDone) {
+    ovenImg = ovenOpenImg; // open oven when finished
+  } else {
+    ovenImg = ovenClosedImg; // closed at start
+  }
 
   imageMode(CENTER);
   let ovenWidth = 550;
@@ -81,7 +78,6 @@ if (breadInOven) {
       breadDone = true;
       breadDoneTimer = 0; // reset the delay timer
     }
-
   } else if (breadDone) {
     // Show baked bread inside oven
     let bakedBreadX = width / 2;
@@ -97,13 +93,13 @@ if (breadInOven) {
     breadDoneTimer++;
 
     // Only go to end screen after the delay
-    if (breadDoneTimer > breadDoneDelay) { // ~2 seconds at 60 FPS
+    if (breadDoneTimer > breadDoneDelay) {
+      // ~2 seconds at 60 FPS
       bread += 1;
       breadDone = false;
       breadDoneTimer = 0;
       currentScreen = "end"; // go to end screen
     }
-
   } else {
     // Raw bread on table (before baking)
     let breadX = width / 2 + 300;
@@ -125,15 +121,15 @@ function ovenMousePressed() {
     mouseY > breadY - breadH / 2 &&
     mouseY < breadY + breadH / 2
   ) {
-    if (ingredientsDone) {
+    if (ingredientsDone === true) {
       // ingredients are done → bake bread
       breadInOven = true;
       bakeTimer = 0;
       breadDone = false;
       energy -= int(random(4, 10));
-    } else {
+    } else if (ingredientsDone === false) {
       // optional: show warning message here
-      warningMessage = "You need to complete all ingredients first!";
+      text(warningMessage, width / 2, height / 2);
     }
   } else {
     currentScreen = "start";
@@ -141,5 +137,5 @@ function ovenMousePressed() {
 }
 
 function ovenKeyPressed() {
-  if (key === 'r' || key === 'R') currentScreen = "start";
+  if (key === "r" || key === "R") currentScreen = "start";
 }
