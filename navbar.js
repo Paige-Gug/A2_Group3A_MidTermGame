@@ -1,3 +1,5 @@
+let recipeClicked = false; // track if the player has clicked the recipe button at least once (starts at false, becomes true when they do)
+
 // ------------------------------
 // Navigation bar visuals
 // ------------------------------
@@ -84,7 +86,7 @@ function navbarMousePressed() {
     currentScreen = "recipe";
     recipeClicked = true; // Mark that the player has clicked the recipe button at least once
   } else if (isHover(recipeBtn) && recipeClicked === true) {
-    currentScreen = prevScreen; // Return to the previous screen if the recipe button is clicked again
+    currentScreen = "pantry"; // Return to the previous screen if the recipe button is clicked again
     recipeClicked = false; // Reset recipeClicked so that the next click will go to the recipe screen again
   } else if (isHover(endBtn)) {
     prevScreen = currentScreen; // Store the current screen before going to end
