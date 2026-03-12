@@ -18,6 +18,10 @@ function drawNavbar() {
   text("BREAD: " + bread, width - 30, 35);
 
   // Energy bar
+  rectMode(CORNER);
+  noFill();
+  rect(155, 30, 300, 20, 20); // Border for energy bar
+
   if (energy < 30) {
     fill(255, 0, 0); // Red color for low energy
   } else if (energy < 60) {
@@ -25,8 +29,11 @@ function drawNavbar() {
   } else {
     fill(27, 158, 22); // Green color for high energy
   }
-  rectMode(CORNER);
   rect(155, 30, energy * 3, 20, 20);
+
+  // ------------------------------------------------------------
+  // Button visuals
+  // ------------------------------------------------------------
 
   // Button information
   const homeBtn = {
@@ -72,7 +79,7 @@ function navbarMousePressed() {
   const homeBtn = { x: 100, y: 90, w: 150, h: 50 };
 
   // Send the player to the recipe or end screens
-  if (isHover(recipeBtn)) {
+  if (isHover(recipeBtn) && currentScreen !== "recipe") {
     currentScreen = "recipe";
   } else if (isHover(endBtn)) {
     currentScreen = "end";

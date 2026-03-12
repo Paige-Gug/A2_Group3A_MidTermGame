@@ -71,9 +71,9 @@ function drawHome() {
     if (isHover(pantryBtn)) {
       image(allimg[1], 315, 490, 420, 580);
     } else if (isHover(ovenBtn)) {
-      image(allimg[2], 1067, 580, 325, 380);
+      image(allimg[2], 1067, 580, 327, 383);
     } else if (isHover(workBtn)) {
-      image(allimg[33], 720, 605, 495, 320);
+      image(allimg[33], 717, 604, 490, 317);
     }
 
     // ---- Cursor feedback ----
