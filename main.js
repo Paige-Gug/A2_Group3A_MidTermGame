@@ -27,6 +27,7 @@ let energy = 90; // game state variable to track the player's energy (starts at 
 let allimg = []; // global array to store all loaded images (populated in preload())
 let font; // global variable to store the loaded font (populated in preload())
 let prevScreen = "recipe";
+let screen = "home";
 let video;
 let playing = false; // track if the intro video is currently playing
 let videoFinished = true; // track if the intro video has finished playing
