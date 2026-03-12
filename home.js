@@ -80,6 +80,8 @@ function drawHome() {
     // If the mouse is over the buttons, show a hand cursor so the player knows it is clickable.
     const over = isHover(workBtn) || isHover(pantryBtn) || isHover(ovenBtn);
     cursor(over ? HAND : ARROW);
+
+    currentScreen = "home";
   }
 }
 
@@ -98,14 +100,17 @@ function homeMousePressed() {
 
   // If workbench is clicked, go to the workbench screen
   if (isHover(workBtn)) {
+    prevScreen = currentScreen; // Store the current screen before going to workbench
     currentScreen = "workbench";
   }
   // If pantry is clicked, go to the pantry screen
   else if (isHover(pantryBtn)) {
+    prevScreen = currentScreen;
     currentScreen = "pantry";
   }
   // If OVEN is clicked, go to the oven screen
   else if (isHover(ovenBtn)) {
+    prevScreen = currentScreen;
     currentScreen = "oven";
   }
 }

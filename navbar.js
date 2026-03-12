@@ -79,11 +79,18 @@ function navbarMousePressed() {
   const homeBtn = { x: 100, y: 90, w: 150, h: 50 };
 
   // Send the player to the recipe or end screens
-  if (isHover(recipeBtn) && currentScreen !== "recipe") {
+  if (isHover(recipeBtn) && recipeClicked === false) {
+    prevScreen = currentScreen; // Store the current screen before going to recipe
     currentScreen = "recipe";
+    recipeClicked = true; // Mark that the player has clicked the recipe button at least once
+  } else if (isHover(recipeBtn) && recipeClicked === true) {
+    currentScreen = "home"; // Return to the previous screen if the recipe button is clicked again
+    recipeClicked = false; // Reset recipeClicked so that the next click will go to the recipe screen again
   } else if (isHover(endBtn)) {
+    prevScreen = currentScreen; // Store the current screen before going to end
     currentScreen = "end";
   } else if (currentScreen !== "home" && isHover(homeBtn)) {
+    prevScreen = currentScreen; // Store the current screen before going to home
     currentScreen = "home";
   }
 }
