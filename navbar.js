@@ -84,7 +84,7 @@ function navbarMousePressed() {
     currentScreen = "recipe";
     recipeClicked = true; // Mark that the player has clicked the recipe button at least once
   } else if (isHover(recipeBtn) && recipeClicked === true) {
-    currentScreen = "home"; // Return to the previous screen if the recipe button is clicked again
+    currentScreen = prevScreen; // Return to the previous screen if the recipe button is clicked again
     recipeClicked = false; // Reset recipeClicked so that the next click will go to the recipe screen again
   } else if (isHover(endBtn)) {
     prevScreen = currentScreen; // Store the current screen before going to end
