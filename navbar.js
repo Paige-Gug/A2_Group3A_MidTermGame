@@ -85,6 +85,7 @@ function navbarMousePressed() {
     prevScreen = screen; // Store the current screen before going to recipe
     currentScreen = "recipe";
     recipeClicked = true; // Mark that the player has clicked the recipe button at least once
+    energy = energy - int(random(2, 5)); // Clicking the recipe button costs a small amount of energy
   } else if (isHover(recipeBtn) && recipeClicked === true) {
     currentScreen = prevScreen; // Return to the previous screen if the recipe button is clicked again
     recipeClicked = false; // Reset recipeClicked so that the next click will go to the recipe screen again
