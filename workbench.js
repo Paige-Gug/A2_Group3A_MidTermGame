@@ -371,7 +371,7 @@ function workbenchMousePressed() {
       let energyLoss = floor(random(4, 8)); // random number 4–8
       energy = max(0, energy - energyLoss);
 
-      wbMessage = `Added ${INGREDIENT_STYLES[ing.name].emoji} ${INGREDIENT_STYLES[ing.name].label}! (-1 energy)`;
+      wbMessage = `Added ${INGREDIENT_STYLES[ing.name].emoji} ${INGREDIENT_STYLES[ing.name].label}! (- energy)`;
       wbMessageTimer = 80;
       return;
     }
@@ -397,6 +397,7 @@ function wbCheckRecipe() {
     else if (have > needed) excess.push(INGREDIENT_STYLES[name].label);
   }
   if (missing.length === 0 && excess.length === 0) {
+    ingredientsDone = true;
     currentScreen = "oven";
   } else if (missing.length > 0) {
     wbMessage = `Missing: ${missing.join(", ")}`;
