@@ -16,7 +16,8 @@ let breadDone = false; // tracks if bread just finished
 let warningMessage = "You need to complete all ingredients first!"; // warning if ingredients not ready
 
 let breadDoneTimer = 0; // counts frames after baking finishes
-let breadDoneDelay = 200; // show baked bread for 2 seconds (120 frames at 60 FPS)
+let breadDoneDelay = 100; // show baked bread for 2 seconds (120 frames at 60 FPS)
+let showWarning = false;
 
 function drawOven() {
   ovenClosedImg = allimg[12]; // closed oven
@@ -58,6 +59,13 @@ function drawOven() {
   let ovenWidth = 550;
   let ovenHeight = 600;
   image(ovenImg, width / 2, ovenY, ovenWidth, ovenHeight);
+
+  if (showWarning) {
+  textSize(28);
+  fill(200, 0, 0);
+  textAlign(CENTER, CENTER);
+  text(warningMessage, width / 2, 190);
+}
 
   // ------------------------------
   // Bread logic
@@ -106,8 +114,6 @@ function drawOven() {
     let breadY = ovenY - 20;
     image(breadImg, breadX, breadY, 220, 140);
   }
-
-  screen = "oven";
 }
 
 // Mouse input
@@ -128,10 +134,17 @@ function ovenMousePressed() {
       breadInOven = true;
       bakeTimer = 0;
       breadDone = false;
+      showWarning = false;
       energy -= int(random(4, 10));
     } else if (ingredientsDone === false) {
       // optional: show warning message here
-      text(warningMessage, width / 2, height / 2);
+      showWarning = true;
     }
+  } else {
+    currentScreen = "start";
   }
+}
+
+function ovenKeyPressed() {
+  if (key === "r" || key === "R") currentScreen = "start";
 }
