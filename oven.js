@@ -61,11 +61,11 @@ function drawOven() {
   image(ovenImg, width / 2, ovenY, ovenWidth, ovenHeight);
 
   if (showWarning) {
-  textSize(28);
-  fill(200, 0, 0);
-  textAlign(CENTER, CENTER);
-  text(warningMessage, width / 2, 190);
-}
+    textSize(28);
+    fill(200, 0, 0);
+    textAlign(CENTER, CENTER);
+    text(warningMessage, width / 2, 190);
+  }
 
   // ------------------------------
   // Bread logic
