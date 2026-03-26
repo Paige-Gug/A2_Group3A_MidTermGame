@@ -85,6 +85,7 @@ function drawOven() {
       bakeTimer = 0;
       breadDone = true;
       breadDoneTimer = 0; // reset the delay timer
+      currentScreen = "end";
     }
   } else if (breadDone) {
     // Show baked bread inside oven
@@ -142,7 +143,5 @@ function ovenMousePressed() {
       // optional: show warning message here
       showWarning = true;
     }
-  } else {
-    currentScreen = "start";
   }
 }
