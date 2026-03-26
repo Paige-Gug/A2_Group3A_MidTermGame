@@ -51,5 +51,5 @@ function drawRecipe() {
 // Any mouse click returns the player to the start screen
 // (no buttons needed for this simple end state)
 function recipeMousePressed() {
-  currentScreen = prevScreen;
+  // intentionally empty
 }
