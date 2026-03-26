@@ -114,6 +114,8 @@ function drawOven() {
     let breadY = ovenY - 20;
     image(breadImg, breadX, breadY, 220, 140);
   }
+
+  screen = "oven"; // Ensure currentScreen is set to "oven" when drawing this screen
 }
 
 // Mouse input
@@ -143,8 +145,4 @@ function ovenMousePressed() {
   } else {
     currentScreen = "start";
   }
-}
-
-function ovenKeyPressed() {
-  if (key === "r" || key === "R") currentScreen = "start";
 }

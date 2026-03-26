@@ -26,11 +26,10 @@ let bread = 0; // game state variable to track how many breads the player has (s
 let energy = 90; // game state variable to track the player's energy (starts at 90)
 let allimg = []; // global array to store all loaded images (populated in preload())
 let font; // global variable to store the loaded font (populated in preload())
-let prevScreen = "recipe";
-let screen = "home";
+let prevScreen = "home";
 let video;
 let playing = false; // track if the intro video is currently playing
-let videoFinished = false; // track if the intro video has finished playing
+let videoFinished = true; // track if the intro video has finished playing
 let ingredientsDone = false; // track if player has collected all ingredients (starts at false, becomes true when they do) --- IGNORE ---
 
 // Ingredient counters (start at 0, increase when player clicks on ingredient in pantry)
@@ -97,11 +96,6 @@ function draw() {
   else if (currentScreen === "recipe") drawRecipe();
   else if (currentScreen === "end") drawEnd();
   else if (currentScreen === "sleep") drawSleep();
-
-  if (currentScreen === "workbench" && prevScreen !== "workbench") {
-    initWorkbench();
-  }
-  prevScreen = currentScreen;
 
   // Only draw navbar if video has finished playing
   if (videoFinished) {

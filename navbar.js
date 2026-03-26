@@ -1,5 +1,3 @@
-let recipeClicked = false; // track if the player has clicked the recipe button at least once (starts at false, becomes true when they do)
-
 // ------------------------------
 // Navigation bar visuals
 // ------------------------------
@@ -78,21 +76,20 @@ function navbarMousePressed() {
 
   const recipeBtn = { x: width - 210, y: 90, w: 370, h: 50 };
   const endBtn = { x: 260, y: 90, w: 170, h: 50 };
-  const homeBtn = { x: 100, y: 90, w: 150, h: 50 };
+  const homeBtn = { x: 100, y: 90, w: 130, h: 50 };
 
   // Send the player to the recipe or end screens
-  if (isHover(recipeBtn) && recipeClicked === false) {
-    prevScreen = screen; // Store the current screen before going to recipe
-    currentScreen = "recipe";
-    recipeClicked = true; // Mark that the player has clicked the recipe button at least once
-    energy = energy - int(random(2, 5)); // Clicking the recipe button costs a small amount of energy
-  } else if (isHover(recipeBtn) && recipeClicked === true) {
-    currentScreen = prevScreen; // Return to the previous screen if the recipe button is clicked again
-    recipeClicked = false; // Reset recipeClicked so that the next click will go to the recipe screen again
+  if (isHover(recipeBtn)) {
+    if (currentScreen !== "recipe") {
+      prevScreen = currentScreen; // Store the current screen before going to recipe
+      currentScreen = "recipe";
+    } else {
+      currentScreen = prevScreen; // Return to the previous screen if the recipe button is clicked again
+    }
   } else if (isHover(endBtn)) {
     prevScreen = currentScreen; // Store the current screen before going to end
     currentScreen = "end";
-  } else if (currentScreen !== "home" && isHover(homeBtn)) {
+  } else if (isHover(homeBtn) && currentScreen !== "home") {
     prevScreen = currentScreen; // Store the current screen before going to home
     currentScreen = "home";
   }

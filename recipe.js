@@ -51,15 +51,5 @@ function drawRecipe() {
 // Any mouse click returns the player to the start screen
 // (no buttons needed for this simple end state)
 function recipeMousePressed() {
-  currentScreen = "start";
-}
-
-// ------------------------------
-// Keyboard input for recipe screen
-// ------------------------------
-// R is commonly used for “restart” in games
-function recipeKeyPressed() {
-  if (key === "r" || key === "R") {
-    currentScreen = "start";
-  }
+  currentScreen = prevScreen;
 }

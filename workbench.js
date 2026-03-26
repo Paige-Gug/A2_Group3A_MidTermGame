@@ -61,6 +61,8 @@ function wbRecipeComplete() {
 }
 
 function drawWorkbench() {
+  screen = "workbench";
+
   // 1. Background
   imageMode(CORNER);
   if (allimg[31]) {
