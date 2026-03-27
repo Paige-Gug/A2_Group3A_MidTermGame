@@ -30,35 +30,35 @@ function drawHome() {
     strokeWeight(5);
     textSize(30);
     textAlign(CENTER, CENTER);
-    text("PANTRY", 315, 200);
+    text("PANTRY", 355, 190);
     text("WORKBENCH", 710, 300);
-    text("OVEN", 1075, 200);
+    text("OVEN", 1035, 190);
 
     // ---- Buttons (data only) ----
     // These objects store the position/size/label for each button.
     // Using objects makes it easy to pass them into drawButton()
     // and also reuse the same information for hover checks.
     const pantryBtn = {
-      x: 315,
-      y: 475,
-      w: 240,
-      h: 420,
+      x: 345,
+      y: 440,
+      w: 370,
+      h: 520,
       label: "",
     };
 
     const workBtn = {
-      x: 710,
-      y: 600,
-      w: 340,
-      h: 240,
+      x: 711,
+      y: 544,
+      w: 437,
+      h: 290,
       label: "",
     };
 
     const ovenBtn = {
-      x: 1075,
-      y: 565,
-      w: 240,
-      h: 280,
+      x: 1025,
+      y: 522,
+      w: 297,
+      h: 345,
       label: "",
     };
 
@@ -70,11 +70,11 @@ function drawHome() {
     // show pantry image when hovered
     imageMode(CENTER);
     if (isHover(pantryBtn)) {
-      image(allimg[1], 315, 490, 420, 580);
+      image(allimg[1], 345, 440, 370, 520);
     } else if (isHover(ovenBtn)) {
-      image(allimg[2], 1067, 580, 327, 383);
+      image(allimg[2], 1025, 522, 297, 345);
     } else if (isHover(workBtn)) {
-      image(allimg[33], 717, 604, 490, 317);
+      image(allimg[33], 711, 544, 437, 290);
     }
 
     // ---- Cursor feedback ----
@@ -93,9 +93,9 @@ function homeMousePressed() {
   if (!videoFinished) return;
 
   // For input checks, we only need x,y,w,h (label is optional)
-  const pantryBtn = { x: 315, y: 475, w: 240, h: 420 };
-  const workBtn = { x: 710, y: 600, w: 340, h: 240 };
-  const ovenBtn = { x: 1075, y: 565, w: 240, h: 280 };
+  const pantryBtn = { x: 345, y: 440, w: 370, h: 520 };
+  const workBtn = { x: 711, y: 544, w: 437, h: 290 };
+  const ovenBtn = { x: 1025, y: 522, w: 297, h: 345 };
 
   // If workbench is clicked, go to the workbench screen
   if (isHover(workBtn)) {
