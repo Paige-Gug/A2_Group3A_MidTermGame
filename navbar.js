@@ -16,6 +16,8 @@ function drawNavbar() {
 
   textAlign(RIGHT, CENTER);
   text("BREAD: " + bread, width - 30, 35);
+  text("DAYS UNTIL CULINARY SCHOOL: " + (10 - day), width - 30, height - 40);
+  text("$ EARNED", width - 30, height - 80);
 
   // Energy bar
   rectMode(CORNER);
@@ -31,9 +33,13 @@ function drawNavbar() {
   }
   rect(155, 30, energy * 3, 20, 20);
 
-  // ------------------------------------------------------------
-  // Button visuals
-  // ------------------------------------------------------------
+  // Money earned
+
+  noFill();
+  rect(width - 50, 250, 20, 400, 20);
+
+  fill(27, 158, 22); // green money bar
+  rect(width - 50, 250 + 400 - money * 4, 20, money * 4, 20);
 
   // Button information
   const homeBtn = {

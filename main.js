@@ -18,12 +18,15 @@
 // ------------------------------
 // This variable is shared across all files because all files run in the same
 // global JavaScript scope when loaded in index.html.
-//
-// We store the “name” of the current screen as a string.
-// Only one screen should be active at a time.
+
+// Game state variables
 let currentScreen = "home"; // "home" | "pantry" | "workbench" | "oven" | "recipe"
 let bread = 0; // game state variable to track how many breads the player has (starts at 0)
 let energy = 90; // game state variable to track the player's energy (starts at 90)
+let day = 0; // game state variable to track the current day (starts at 0)
+let money = 10;
+
+// Design
 let allimg = []; // global array to store all loaded images (populated in preload())
 let font; // global variable to store the loaded font (populated in preload())
 let prevScreen = "home";

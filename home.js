@@ -30,9 +30,9 @@ function drawHome() {
     strokeWeight(5);
     textSize(30);
     textAlign(CENTER, CENTER);
-    text("Pantry", 315, 200);
-    text("Workbench", 710, 300);
-    text("Oven", 1075, 200);
+    text("PANTRY", 315, 200);
+    text("WORKBENCH", 710, 300);
+    text("OVEN", 1075, 200);
 
     // ---- Buttons (data only) ----
     // These objects store the position/size/label for each button.
