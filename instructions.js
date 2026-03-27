@@ -33,10 +33,10 @@ function drawInstructions() {
   text("10 days. You need", 240, 270);
   text("to raise $400 in ", 240, 305);
   text("order to go.", 240, 340);
-  text("Careful, pushing too", 240, 395);
-  text("hard has consequences.", 240, 430);
-  text("You must balance", 240, 465);
-  text("baking and resting.", 240, 500);
+  text("Every action costs energy.", 240, 395);
+  text("You'll need to be strategic ", 240, 430);
+  text("about what you click ", 240, 465);
+  text("and how much.", 240, 500);
 
   // Gameplay
   text("Click around to find", 760, 200);
