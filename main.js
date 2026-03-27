@@ -20,7 +20,7 @@
 // global JavaScript scope when loaded in index.html.
 
 // Game state variables
-let currentScreen = "home"; // "home" | "pantry" | "workbench" | "oven" | "recipe"
+let currentScreen = "splash"; // "home" | "pantry" | "workbench" | "oven" | "recipe"
 let bread = 0; // game state variable to track how many breads the player has (starts at 0)
 let energy = 90; // game state variable to track the player's energy (starts at 90)
 let day = 0; // game state variable to track the current day (starts at 0)
@@ -43,7 +43,7 @@ let saltCounter = 0;
 
 // Load all images
 function preload() {
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 51; i++) {
     let name = loadImage(`libraries/assets/images/${i}.png`);
     allimg.push(name);
   }
@@ -92,7 +92,9 @@ function draw() {
   //   end.js           → drawEnd()
   //   sleep.js         → drawSleep()
 
-  if (currentScreen === "home") drawHome();
+  if (currentScreen === "splash") drawSplash();
+  else if (currentScreen === "instructions") drawInstructions();
+  else if (currentScreen === "home") drawHome();
   else if (currentScreen === "pantry") drawPantry();
   else if (currentScreen === "workbench") drawWorkbench();
   else if (currentScreen === "oven") drawOven();
@@ -101,7 +103,12 @@ function draw() {
   else if (currentScreen === "sleep") drawSleep();
 
   // Only draw navbar if video has finished playing
-  if (videoFinished) {
+  if (
+    videoFinished &&
+    currentScreen !== "splash" &&
+    currentScreen !== "instructions" &&
+    currentScreen !== "sleep"
+  ) {
     drawNavbar();
   }
 
@@ -123,7 +130,9 @@ function mousePressed() {
   // recipe.js          → recipeMousePressed()
   // end.js          → endMousePressed()
 
-  if (currentScreen === "home") homeMousePressed();
+  if (currentScreen === "splash") splashMousePressed();
+  else if (currentScreen === "instructions") instructionsMousePressed();
+  else if (currentScreen === "home") homeMousePressed();
   else if (currentScreen === "pantry") pantryMousePressed();
   else if (currentScreen === "workbench") workbenchMousePressed();
   else if (currentScreen === "oven") ovenMousePressed();
@@ -147,7 +156,9 @@ function keyPressed() {
   // recipe.js        → recipeKeyPressed()
   // end.js           → endKeyPressed()
 
-  if (currentScreen === "home") homeKeyPressed();
+  if (currentScreen === "splash") splashKeyPressed();
+  else if (currentScreen === "instructions") instructionsKeyPressed();
+  else if (currentScreen === "home") homeKeyPressed();
   else if (currentScreen === "pantry") pantryKeyPressed();
   else if (currentScreen === "workbench") workbenchKeyPressed();
   else if (currentScreen === "oven") ovenKeyPressed();
