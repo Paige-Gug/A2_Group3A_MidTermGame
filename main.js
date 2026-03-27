@@ -43,7 +43,7 @@ let saltCounter = 0;
 
 // Load all images
 function preload() {
-  for (let i = 0; i < 51; i++) {
+  for (let i = 0; i < 52; i++) {
     let name = loadImage(`libraries/assets/images/${i}.png`);
     allimg.push(name);
   }

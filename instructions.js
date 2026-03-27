@@ -14,35 +14,47 @@ function drawInstructions() {
   background(235, 223, 226);
   imageMode(CENTER);
   image(allimg[4], width / 2, height / 2, width, height); // instructions background image
-  image(allimg[3], width / 2, 440, 1200, 650); // instructions image
+  image(allimg[51], width / 2, height / 2, 1200, 650); // instructions image
 
   fill(0);
   textAlign(LEFT, CENTER);
   textSize(25);
+  stroke(0);
 
   // Game instructions
-  text("Today we are making my", 240, 300);
-  text("favourite sourdough bread!", 240, 335);
-  text("We have 3 orders,", 240, 400);
-  text("but we might not be able", 240, 435);
-  text("to make them all today.", 240, 470);
-  text("Balancing our energy is", 240, 535);
-  text("just as important as", 240, 570);
-  text("filling orders!", 240, 605);
+  strokeWeight(1);
+  text("Goals:", 240, 150);
+  text("Gameplay:", 760, 150);
+  strokeWeight(0);
 
-  // Ingredients
-  text("Collect the following", 760, 200);
-  text("items from the pantry.", 760, 235);
-  text("Ingredients:", 760, 290);
-  text("- Flour: " + flourCounter + "/3", 760, 340);
-  text("- Water: " + waterCounter + "/2", 760, 390);
-  text("- Starter: " + starterCounter + "/1", 760, 440);
-  text("- Salt: " + saltCounter + "/1", 760, 490);
+  // Goals
+  text("Your culinary school", 240, 200);
+  text("application is due in", 240, 235);
+  text("10 days. You need", 240, 270);
+  text("to raise $400 in ", 240, 305);
+  text("order to go.", 240, 340);
+  text("Careful, pushing too", 240, 395);
+  text("hard has consequences.", 240, 430);
+  text("You must balance", 240, 465);
+  text("baking and resting.", 240, 500);
 
-  // Instructions
-  text("Combine all the ingredients", 760, 555);
-  text("on the workbench, then", 760, 590);
-  text("bake the dough in the oven.", 760, 625);
+  // Gameplay
+  text("Click around to find", 760, 200);
+  text("ingredients. Combine all ", 760, 235);
+  text("the ingredients in the bowl.", 760, 270);
+  text("Bake and sell bread to", 760, 305);
+  text("earn money.", 760, 340);
+
+  const playBtn = {
+    x: 925,
+    y: 560,
+    w: 300,
+    h: 70,
+    label: "START GAME",
+  };
+
+  // Draw all buttons
+  drawButton(playBtn);
 }
 
 // ------------------------------
@@ -51,5 +63,11 @@ function drawInstructions() {
 // Any mouse click returns the player to the start screen
 // (no buttons needed for this simple end state)
 function instructionsMousePressed() {
-  // intentionally empty
+  const playBtn = { x: 925, y: 560, w: 300, h: 70 };
+
+  // If play button is clicked, go to the home screen
+  if (isHover(playBtn)) {
+    prevScreen = currentScreen;
+    currentScreen = "home";
+  }
 }

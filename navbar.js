@@ -16,8 +16,14 @@ function drawNavbar() {
 
   textAlign(RIGHT, CENTER);
   text("BREAD: " + bread, width - 30, 35);
+
+  text("EARNED: $" + money, width - 30, height - 80);
+  text("$400", width - 15, 220);
+
+  stroke(255, 0, 0);
+  fill(255, 0, 0);
   text("DAYS UNTIL CULINARY SCHOOL: " + (10 - day), width - 30, height - 40);
-  text("$ EARNED", width - 30, height - 80);
+  stroke(0);
 
   // Energy bar
   rectMode(CORNER);
@@ -34,7 +40,6 @@ function drawNavbar() {
   rect(155, 30, energy * 3, 20, 20);
 
   // Money earned
-
   noFill();
   rect(width - 50, 250, 20, 400, 20);
 
