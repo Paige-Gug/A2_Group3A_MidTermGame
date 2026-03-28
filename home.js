@@ -10,7 +10,6 @@
 // ------------------------------------------------------------
 // drawHome() is called from main.js only when:
 // currentScreen === "home"
-let timer = 250; // timer to show the day 1 image for a few seconds before showing the home screen
 
 function drawHome() {
   if (!videoFinished) {
@@ -23,10 +22,12 @@ function drawHome() {
   } else {
     imageMode(CORNER);
 
-    if (timer > 0) {
-      image(openday, 0, 0, width, height); // background image
+    if (daytimer > 0) {
+      textSize(40);
+      fill(84, 43, 20);
+      image(openday, 0, 0, width, height);
       text("DAY " + day, 640, height / 6);
-      timer--;
+      daytimer--;
     } else {
       game = true;
 

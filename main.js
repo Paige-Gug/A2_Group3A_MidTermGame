@@ -26,6 +26,7 @@ let energy = 90; // game state variable to track the player's energy (starts at 
 let day = 1; // game state variable to track the current day (starts at 0)
 let money = 10;
 let game = false;
+let daytimer = 250; // timer to show the day 1 image for a few seconds before showing the home screen
 
 // Design
 let allimg = []; // global array to store all loaded images (populated in preload())
@@ -53,15 +54,6 @@ function preload() {
   // Load the intro video
   video = createVideo("libraries/assets/intro.mp4");
   openday = createVideo("libraries/assets/day.mp4");
-
-  // Load the sound effects
-  ambiance = loadSound("libraries/assets/audio/ambiance.mp3");
-  cash = loadSound("libraries/assets/audio/cash.mp3");
-  click = loadSound("libraries/assets/audio/click.mp3");
-  ding = loadSound("libraries/assets/audio/ding.mp3");
-  swoosh = loadSound("libraries/assets/audio/swoosh.mp3");
-  timer = loadSound("libraries/assets/audio/timer.mp3");
-  trash = loadSound("libraries/assets/audio/trash.mp3");
 
   // Load a custom font before the sketch starts
   font = loadFont("libraries/assets/font/playpen.ttf");
