@@ -23,9 +23,9 @@ function drawHome() {
   } else {
     imageMode(CORNER);
 
-    if (day === 1 && timer > 0 && openday.width > 0) {
+    if (timer > 0) {
       image(openday, 0, 0, width, height); // background image
-      text("DAY 1", width / 2, height / 6);
+      text("DAY " + day, 640, height / 6);
       timer--;
     } else {
       game = true;

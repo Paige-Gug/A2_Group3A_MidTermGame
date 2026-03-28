@@ -25,18 +25,4 @@ function drawSleep() {
 // ------------------------------
 // Mouse input for recipe screen
 // ------------------------------
-// Any mouse click returns the player to the start screen
-// (no buttons needed for this simple end state)
-function sleepMousePressed() {
-  currentScreen = "home";
-}
-
-// ------------------------------
-// Keyboard input for recipe screen
-// ------------------------------
-// R is commonly used for “restart” in games
-function sleepKeyPressed() {
-  if (key === "r" || key === "R") {
-    currentScreen = "home";
-  }
-}
+function sleepMousePressed() {}

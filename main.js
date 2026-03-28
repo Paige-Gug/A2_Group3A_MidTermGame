@@ -52,7 +52,7 @@ function preload() {
 
   // Load the intro video
   video = createVideo("libraries/assets/intro.mp4");
-  openday = createVideo("libraries/assets/day1.mp4");
+  openday = createVideo("libraries/assets/day.mp4");
 
   // Load a custom font before the sketch starts
   font = loadFont("libraries/assets/font/playpen.ttf");
@@ -72,8 +72,7 @@ function setup() {
   initWorkbench();
 
   openday.size(width, height);
-  openday.play();
-  openday.elt.muted = true;
+  openday.elt.muted = true; // muted to avoid browser autoplay restrictions
   openday.hide();
 
   video.hide();
