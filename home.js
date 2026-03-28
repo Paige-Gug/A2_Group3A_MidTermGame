@@ -92,6 +92,28 @@ function drawHome() {
       // If the mouse is over the buttons, show a hand cursor so the player knows it is clickable.
       const over = isHover(workBtn) || isHover(pantryBtn) || isHover(ovenBtn);
       cursor(over ? HAND : ARROW);
+
+      if (inst == false) {
+        tut = "Click on recipe instructions ";
+        tut2 = "to find out what to bake!";
+        prevScreen = currentScreen;
+        currentScreen = "popup";
+      }
+
+      if (
+        eng == false &&
+        inst == true &&
+        recp == true &&
+        pan == true &&
+        work == true &&
+        ovn == true
+      ) {
+        tut = "Watch your energy carefully,";
+        tut2 = "and go to sleep when it gets low!";
+        tut3 = "Good luck!";
+        prevScreen = currentScreen;
+        currentScreen = "popup";
+      }
     }
   }
 }
