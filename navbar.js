@@ -69,20 +69,23 @@ function drawNavbar() {
     label: "END DAY",
   };
 
-  const shopBtn = {
-    x: 75,
-    y: height - 75,
-    w: 100,
-    h: 100,
-    label: "SHOP",
-  };
-
   // Draw the buttons on the navbar
   const disabled = currentScreen === "sleep";
   drawButton(homeBtn, disabled);
   drawButton(recipeBtn, disabled);
   drawButton(endBtn, disabled);
-  drawButton(shopBtn, disabled);
+
+  if (day >= 2) {
+    const shopBtn = {
+      x: 75,
+      y: height - 75,
+      w: 100,
+      h: 100,
+      label: "SHOP",
+    };
+
+    drawButton(shopBtn, disabled);
+  }
 }
 
 // ------------------------------------------------------------
