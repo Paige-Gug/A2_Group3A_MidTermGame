@@ -43,8 +43,8 @@ let waterCounter = 0;
 let starterCounter = 0;
 let saltCounter = 0;
 
-// Load all images
 function preload() {
+  // Load all images
   for (let i = 0; i < 53; i++) {
     let name = loadImage(`libraries/assets/images/${i}.png`);
     allimg.push(name);
@@ -53,6 +53,15 @@ function preload() {
   // Load the intro video
   video = createVideo("libraries/assets/intro.mp4");
   openday = createVideo("libraries/assets/day.mp4");
+
+  // Load the sound effects
+  ambiance = loadSound("libraries/assets/audio/ambiance.mp3");
+  cash = loadSound("libraries/assets/audio/cash.mp3");
+  click = loadSound("libraries/assets/audio/click.mp3");
+  ding = loadSound("libraries/assets/audio/ding.mp3");
+  swoosh = loadSound("libraries/assets/audio/swoosh.mp3");
+  timer = loadSound("libraries/assets/audio/timer.mp3");
+  trash = loadSound("libraries/assets/audio/trash.mp3");
 
   // Load a custom font before the sketch starts
   font = loadFont("libraries/assets/font/playpen.ttf");
@@ -73,6 +82,7 @@ function setup() {
 
   openday.size(width, height);
   openday.elt.muted = true; // muted to avoid browser autoplay restrictions
+  openday.play();
   openday.hide();
 
   video.hide();

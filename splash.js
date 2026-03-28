@@ -63,9 +63,6 @@ function splashMousePressed() {
   // If play button is clicked, go to the home screen
   if (isHover(playBtn)) {
     prevScreen = currentScreen;
-    openday.play();
-    image(openday, 0, 0, width, height); // background image
-    text("DAY 1", width / 2, height / 6);
     currentScreen = "home";
   }
   // If instructions button is clicked, go to the instructions screen
