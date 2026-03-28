@@ -12,6 +12,8 @@
 // currentScreen === "splash"
 
 function drawSplash() {
+  game = false;
+
   imageMode(CORNER);
   // Background colour for the splash screen
   image(allimg[50], 0, 0, width, height); // background image

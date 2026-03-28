@@ -10,6 +10,8 @@
 // drawInstructions() is called from main.js
 // only when currentScreen === "instructions"
 function drawInstructions() {
+  game = false;
+
   // Red-tinted background to communicate failure
   background(235, 223, 226);
   imageMode(CENTER);

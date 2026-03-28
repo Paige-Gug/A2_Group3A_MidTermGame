@@ -10,6 +10,7 @@
 // ------------------------------------------------------------
 // drawHome() is called from main.js only when:
 // currentScreen === "home"
+let timer = 250; // timer to show the day 1 image for a few seconds before showing the home screen
 
 function drawHome() {
   if (!videoFinished) {
@@ -21,66 +22,75 @@ function drawHome() {
     image(video, 0, 0, width, height);
   } else {
     imageMode(CORNER);
-    // Background colour for the home screen
-    image(allimg[0], 0, 0, width, height); // background image
 
-    // ---- Title text ----
-    fill(255);
-    stroke(84, 43, 20);
-    strokeWeight(5);
-    textSize(30);
-    textAlign(CENTER, CENTER);
-    text("PANTRY", 345, 190);
-    text("WORKBENCH", 700, 300);
-    text("OVEN", 1025, 190);
+    if (day === 1 && timer > 0 && openday.width > 0) {
+      image(openday, 0, 0, width, height); // background image
+      text("DAY 1", width / 2, height / 6);
+      timer--;
+    } else {
+      game = true;
 
-    // ---- Buttons (data only) ----
-    // These objects store the position/size/label for each button.
-    // Using objects makes it easy to pass them into drawButton()
-    // and also reuse the same information for hover checks.
-    const pantryBtn = {
-      x: 345,
-      y: 440,
-      w: 370,
-      h: 520,
-      label: "",
-    };
+      // Background colour for the home screen
+      image(allimg[0], 0, 0, width, height); // background image
 
-    const workBtn = {
-      x: 711,
-      y: 544,
-      w: 437,
-      h: 290,
-      label: "",
-    };
+      // ---- Title text ----
+      fill(255);
+      stroke(84, 43, 20);
+      strokeWeight(5);
+      textSize(30);
+      textAlign(CENTER, CENTER);
+      text("PANTRY", 345, 190);
+      text("WORKBENCH", 700, 300);
+      text("OVEN", 1025, 190);
 
-    const ovenBtn = {
-      x: 1025,
-      y: 522,
-      w: 297,
-      h: 345,
-      label: "",
-    };
+      // ---- Buttons (data only) ----
+      // These objects store the position/size/label for each button.
+      // Using objects makes it easy to pass them into drawButton()
+      // and also reuse the same information for hover checks.
+      const pantryBtn = {
+        x: 345,
+        y: 440,
+        w: 370,
+        h: 520,
+        label: "",
+      };
 
-    // Draw all buttons
-    drawButton(pantryBtn);
-    drawButton(workBtn);
-    drawButton(ovenBtn);
+      const workBtn = {
+        x: 711,
+        y: 544,
+        w: 437,
+        h: 290,
+        label: "",
+      };
 
-    // show pantry image when hovered
-    imageMode(CENTER);
-    if (isHover(pantryBtn)) {
-      image(allimg[1], 345, 440, 370, 520);
-    } else if (isHover(ovenBtn)) {
-      image(allimg[2], 1025, 522, 297, 345);
-    } else if (isHover(workBtn)) {
-      image(allimg[33], 711, 544, 437, 290);
+      const ovenBtn = {
+        x: 1025,
+        y: 522,
+        w: 297,
+        h: 345,
+        label: "",
+      };
+
+      // Draw all buttons
+      drawButton(pantryBtn);
+      drawButton(workBtn);
+      drawButton(ovenBtn);
+
+      // show pantry image when hovered
+      imageMode(CENTER);
+      if (isHover(pantryBtn)) {
+        image(allimg[1], 345, 440, 370, 520);
+      } else if (isHover(ovenBtn)) {
+        image(allimg[2], 1025, 522, 297, 345);
+      } else if (isHover(workBtn)) {
+        image(allimg[33], 711, 544, 437, 290);
+      }
+
+      // ---- Cursor feedback ----
+      // If the mouse is over the buttons, show a hand cursor so the player knows it is clickable.
+      const over = isHover(workBtn) || isHover(pantryBtn) || isHover(ovenBtn);
+      cursor(over ? HAND : ARROW);
     }
-
-    // ---- Cursor feedback ----
-    // If the mouse is over the buttons, show a hand cursor so the player knows it is clickable.
-    const over = isHover(workBtn) || isHover(pantryBtn) || isHover(ovenBtn);
-    cursor(over ? HAND : ARROW);
   }
 }
 

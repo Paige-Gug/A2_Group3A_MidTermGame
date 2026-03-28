@@ -22,7 +22,7 @@ function drawNavbar() {
 
   stroke(255, 0, 0);
   fill(255, 0, 0);
-  text("DAYS UNTIL CULINARY SCHOOL: " + (10 - day), width - 30, height - 40);
+  text("DAYS UNTIL CULINARY SCHOOL: " + (11 - day), width - 30, height - 40);
   stroke(0);
 
   // Energy bar

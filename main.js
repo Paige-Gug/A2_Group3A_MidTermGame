@@ -23,14 +23,16 @@
 let currentScreen = "splash"; // "home" | "pantry" | "workbench" | "oven" | "recipe"
 let bread = 0; // game state variable to track how many breads the player has (starts at 0)
 let energy = 90; // game state variable to track the player's energy (starts at 90)
-let day = 0; // game state variable to track the current day (starts at 0)
+let day = 1; // game state variable to track the current day (starts at 0)
 let money = 10;
+let game = false;
 
 // Design
 let allimg = []; // global array to store all loaded images (populated in preload())
 let font; // global variable to store the loaded font (populated in preload())
 let prevScreen = "home";
 let video;
+let openday;
 let playing = false; // track if the intro video is currently playing
 let videoFinished = true; // track if the intro video has finished playing
 let ingredientsDone = false; // track if player has collected all ingredients (starts at false, becomes true when they do) --- IGNORE ---
@@ -43,13 +45,14 @@ let saltCounter = 0;
 
 // Load all images
 function preload() {
-  for (let i = 0; i < 52; i++) {
+  for (let i = 0; i < 53; i++) {
     let name = loadImage(`libraries/assets/images/${i}.png`);
     allimg.push(name);
   }
 
   // Load the intro video
   video = createVideo("libraries/assets/intro.mp4");
+  openday = createVideo("libraries/assets/day1.mp4");
 
   // Load a custom font before the sketch starts
   font = loadFont("libraries/assets/font/playpen.ttf");
@@ -67,6 +70,11 @@ function setup() {
   fill(84, 43, 20);
   textFont(font);
   initWorkbench();
+
+  openday.size(width, height);
+  openday.play();
+  openday.elt.muted = true;
+  openday.hide();
 
   video.hide();
   video.size(width, height);
@@ -103,12 +111,7 @@ function draw() {
   else if (currentScreen === "sleep") drawSleep();
 
   // Only draw navbar if video has finished playing
-  if (
-    videoFinished &&
-    currentScreen !== "splash" &&
-    currentScreen !== "instructions" &&
-    currentScreen !== "sleep"
-  ) {
+  if (videoFinished && game === true) {
     drawNavbar();
   }
 

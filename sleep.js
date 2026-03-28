@@ -10,6 +10,8 @@
 // drawSleep() is called from main.js
 // only when currentScreen === "sleep"
 function drawSleep() {
+  game = false;
+
   background(29, 24, 74);
 
   fill(255);
