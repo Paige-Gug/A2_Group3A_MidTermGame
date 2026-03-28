@@ -39,6 +39,7 @@ function drawSleep() {
     currentScreen = "home";
     sleepTimer = 300;
     daytimer = 250;
+    openday.play();
   }
 }
 

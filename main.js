@@ -74,7 +74,7 @@ function setup() {
 
   openday.size(width, height);
   openday.elt.muted = true; // muted to avoid browser autoplay restrictions
-  openday.play();
+  openday.stop();
   openday.hide();
 
   video.hide();

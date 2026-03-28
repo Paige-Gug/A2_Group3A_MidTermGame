@@ -64,6 +64,7 @@ function splashMousePressed() {
   if (isHover(playBtn)) {
     prevScreen = currentScreen;
     currentScreen = "home";
+    openday.play();
   }
   // If instructions button is clicked, go to the instructions screen
   else if (isHover(instBtn)) {

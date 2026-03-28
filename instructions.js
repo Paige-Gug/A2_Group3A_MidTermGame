@@ -71,5 +71,6 @@ function instructionsMousePressed() {
   if (isHover(playBtn)) {
     prevScreen = currentScreen;
     currentScreen = "home";
+    openday.play();
   }
 }

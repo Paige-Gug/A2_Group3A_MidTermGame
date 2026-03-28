@@ -30,6 +30,7 @@ function drawHome() {
       daytimer--;
     } else {
       game = true;
+      openday.stop();
 
       // Background colour for the home screen
       image(allimg[0], 0, 0, width, height); // background image
