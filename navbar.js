@@ -29,7 +29,6 @@ function drawNavbar() {
   rectMode(CORNER);
   noFill();
   rect(155, 30, 300, 20, 20); // Border for energy bar
-
   if (energy < 30) {
     fill(255, 0, 0); // Red color for low energy
   } else if (energy < 60) {
@@ -42,7 +41,6 @@ function drawNavbar() {
   // Money earned
   noFill();
   rect(width - 50, 250, 20, 400, 20);
-
   fill(27, 158, 22); // green money bar
   rect(width - 50, 250 + 400 - money * 4, 20, money * 4, 20);
 
@@ -71,11 +69,20 @@ function drawNavbar() {
     label: "END DAY",
   };
 
+  const shopBtn = {
+    x: 75,
+    y: height - 75,
+    w: 100,
+    h: 100,
+    label: "SHOP",
+  };
+
   // Draw the buttons on the navbar
   const disabled = currentScreen === "sleep";
   drawButton(homeBtn, disabled);
   drawButton(recipeBtn, disabled);
   drawButton(endBtn, disabled);
+  drawButton(shopBtn, disabled);
 }
 
 // ------------------------------------------------------------
@@ -88,6 +95,7 @@ function navbarMousePressed() {
   const recipeBtn = { x: width - 210, y: 90, w: 370, h: 50 };
   const endBtn = { x: 260, y: 90, w: 170, h: 50 };
   const homeBtn = { x: 100, y: 90, w: 130, h: 50 };
+  const shopBtn = { x: 75, y: height - 75, w: 100, h: 100, label: "SHOP" };
 
   // Send the player to the recipe or end screens
   if (isHover(recipeBtn)) {
@@ -103,5 +111,8 @@ function navbarMousePressed() {
   } else if (isHover(homeBtn) && currentScreen !== "home") {
     prevScreen = currentScreen; // Store the current screen before going to home
     currentScreen = "home";
+  } else if (isHover(shopBtn)) {
+    prevScreen = currentScreen; // Store the current screen before going to shop
+    currentScreen = "shop";
   }
 }

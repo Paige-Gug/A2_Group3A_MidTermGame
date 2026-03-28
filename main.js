@@ -108,6 +108,7 @@ function draw() {
   else if (currentScreen === "workbench") drawWorkbench();
   else if (currentScreen === "oven") drawOven();
   else if (currentScreen === "recipe") drawRecipe();
+  else if (currentScreen === "shop") drawShop();
   else if (currentScreen === "end") drawEnd();
   else if (currentScreen === "sleep") drawSleep();
 
@@ -141,6 +142,7 @@ function mousePressed() {
   else if (currentScreen === "workbench") workbenchMousePressed();
   else if (currentScreen === "oven") ovenMousePressed();
   else if (currentScreen === "recipe") recipeMousePressed();
+  else if (currentScreen === "shop") shopMousePressed();
   else if (currentScreen === "end") endMousePressed();
   else if (currentScreen === "sleep") sleepMousePressed();
 
@@ -167,6 +169,7 @@ function keyPressed() {
   else if (currentScreen === "workbench") workbenchKeyPressed();
   else if (currentScreen === "oven") ovenKeyPressed();
   else if (currentScreen === "recipe") recipeKeyPressed();
+  else if (currentScreen === "shop") shopKeyPressed();
   else if (currentScreen === "end") endKeyPressed();
   else if (currentScreen === "sleep") sleepKeyPressed();
 
