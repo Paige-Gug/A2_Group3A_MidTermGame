@@ -67,7 +67,7 @@ let trash;
 
 function preload() {
   // Load all images
-  for (let i = 0; i < 53; i++) {
+  for (let i = 0; i < 55; i++) {
     let name = loadImage(`libraries/assets/images/${i}.png`);
     allimg.push(name);
   }
