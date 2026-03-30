@@ -12,6 +12,8 @@
 // currentScreen === "splash"
 
 function drawSplash() {
+  game = false;
+
   imageMode(CORNER);
   // Background colour for the splash screen
   image(allimg[50], 0, 0, width, height); // background image
@@ -62,6 +64,9 @@ function splashMousePressed() {
   if (isHover(playBtn)) {
     prevScreen = currentScreen;
     currentScreen = "home";
+    ambiance.play();
+    ambiance.loop();
+    openday.play();
   }
   // If instructions button is clicked, go to the instructions screen
   else if (isHover(instBtn)) {
