@@ -118,7 +118,7 @@ function pantryMousePressed() {
 
     if (clicked) {
       incrementIngredientCounter(ingredient.counterName);
-      energy -= int(random(4, 8));
+      energy -= int(random(1, 2));
     }
   }
 }
