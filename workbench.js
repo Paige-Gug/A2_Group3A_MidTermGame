@@ -10,13 +10,29 @@
 
 // ── Recipes ─────────────────────────────────────────────────────────────────
 const BREAD_RECIPE = { flour: 3, water: 2, starter: 1, salt: 1 };
-const MILK_BREAD_RECIPE = { flour: 4, water: 1, starter: 2, salt: 1 };
 const TOMATO_BREAD_RECIPE = {
   flour: 3,
   water: 2,
   starter: 1,
   salt: 1,
   tomato: 2,
+};
+const BLUEBERRY_BREAD_RECIPE = {
+  flour: 3,
+  water: 2,
+  starter: 1,
+  salt: 1,
+  blueberry: 3,
+  sugar: 2,
+};
+
+const APPLE_CINNAMON_BREAD_RECIPE = {
+  flour: 3,
+  water: 2,
+  starter: 1,
+  salt: 1,
+  apple: 3,
+  cinnamon: 1,
 };
 
 // Returns the active recipe object based on current day and level.

@@ -10,7 +10,6 @@
 // drawShop() is called from main.js
 // only when currentScreen === "shop"
 function drawShop() {
-  // Red-tinted background to communicate failure
   background(235, 223, 226);
   imageMode(CENTER);
   image(allimg[4], width / 2, height / 2, width, height); // shop background image

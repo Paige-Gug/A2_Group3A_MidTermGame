@@ -178,25 +178,37 @@ function pantryMousePressed() {
 
     if (clicked) {
       incrementIngredientCounter(ingredient.counterName);
-      energy -= int(random(4, 8));
+      energy -= int(random(1, 3));
     }
   }
 }
 
 function incrementIngredientCounter(counterName) {
   if (counterName === "starterCounter") starterCounter++;
-  if (counterName === "saltCounter") saltCounter++;
-  if (counterName === "waterCounter") waterCounter++;
-  if (counterName === "flourCounter") flourCounter++;
+  else if (counterName === "saltCounter") saltCounter++;
+  else if (counterName === "waterCounter") waterCounter++;
+  else if (counterName === "flourCounter") flourCounter++;
+  else if (counterName === "tomatoCounter") tomatoCounter++;
+  else if (counterName === "appleCounter") appleCounter++;
+  else if (counterName === "blueberryCounter") blueberryCounter++;
+  else if (counterName === "cinnamonCounter") cinnamonCounter++;
+  else if (counterName === "sugarCounter") sugarCounter++;
 }
 
 function drawIngredientCounter(ingredient) {
   let count = 0;
 
   if (ingredient.counterName === "starterCounter") count = starterCounter;
-  if (ingredient.counterName === "saltCounter") count = saltCounter;
-  if (ingredient.counterName === "waterCounter") count = waterCounter;
-  if (ingredient.counterName === "flourCounter") count = flourCounter;
+  else if (ingredient.counterName === "saltCounter") count = saltCounter;
+  else if (ingredient.counterName === "waterCounter") count = waterCounter;
+  else if (ingredient.counterName === "flourCounter") count = flourCounter;
+  else if (ingredient.counterName === "tomatoCounter") count = tomatoCounter;
+  else if (ingredient.counterName === "appleCounter") count = appleCounter;
+  else if (ingredient.counterName === "blueberryCounter")
+    count = blueberryCounter;
+  else if (ingredient.counterName === "cinnamonCounter")
+    count = cinnamonCounter;
+  else if (ingredient.counterName === "sugarCounter") count = sugarCounter;
 
   fill(0);
   textSize(20);
