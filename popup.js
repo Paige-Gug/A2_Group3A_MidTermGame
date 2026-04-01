@@ -1,7 +1,7 @@
 function drawPopup() {
   // Draw the popup background
-  fill(255, 255, 255, 240); // White with some transparency
-  rect(width / 2, height / 2, 470, 500, 10); // Rounded rectangle
+  imageMode(CENTER);
+  image(allimg[58], width / 2, height / 2, 800, 500); // Popup background image
   fill(84, 43, 20);
   text(tut, width / 2, height / 2 - 20);
   text(tut2, width / 2, height / 2 + 20);
