@@ -19,7 +19,7 @@
 let currentScreen = "splash"; // "home" | "pantry" | "workbench" | "oven" | "recipe"
 let bread = 0;
 let energy = 90;
-let day = 2;
+let day = 1;
 let money = 10;
 let game = false;
 let daytimer = 250; // timer to show the day 1 image for a few seconds before showing the home screen
