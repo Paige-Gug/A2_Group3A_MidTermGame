@@ -17,6 +17,7 @@ function drawSleep() {
   fill(255);
   textAlign(CENTER);
   textSize(40);
+  imageMode(CENTER);
 
   if (day >= 10) {
     background(29, 24, 74);
@@ -37,7 +38,7 @@ function drawSleep() {
     text("One day closer to culinary school!", width / 2, height / 2);
     sleepTimer--;
   } else if (energy <= 4 && sleepTimer > 0) {
-    image(nightvid, 0, 0, width, height);
+    image(nightvid, width / 2, height / 2, width, height);
     text(
       "You are too tired to continue, you'll have to take tomorrow off.",
       width / 2,

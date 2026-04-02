@@ -1,6 +1,7 @@
 function drawEnd() {
   // Background colour for the home screen
   background(180, 225, 220); // soft teal background
+  imageMode(CENTER);
   image(allimg[4], width / 2, height / 2, width, height); // recipe background image
 
   // ---- Title text ----
