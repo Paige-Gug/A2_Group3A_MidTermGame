@@ -260,6 +260,7 @@ function drawWorkbench() {
 
   cursor(wbIsOverIngredient() ? HAND : ARROW);
 
+  // Tutorial popups for workbench interactions
   if (work == false) {
     tut = "Click on ingredients";
     tut2 = "to mix them in the bowl";
