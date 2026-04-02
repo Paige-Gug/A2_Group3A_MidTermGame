@@ -180,7 +180,11 @@ function setup() {
   video.elt.muted = true; // Allow autoplay by muting the video
   video.onended(() => {
     videoFinished = true;
+<<<<<<< HEAD
     currentScreen = "home"; // Ensure we switch to the home screen after the video ends
+=======
+    currentScreen = "splash"; // Ensure we switch to the home screen after the video ends
+>>>>>>> parent of bd0261d (Update main.js)
   });
 }
 
