@@ -259,14 +259,6 @@ function drawWorkbench() {
   drawWbMessage();
 
   cursor(wbIsOverIngredient() ? HAND : ARROW);
-
-  // Tutorial popups for workbench interactions
-  if (work == false) {
-    tut = "Click on ingredients";
-    tut2 = "to mix them in the bowl";
-    prevScreen = currentScreen;
-    currentScreen = "popup";
-  }
 }
 
 // ── Trash-can button ─────────────────────────────────────────────────────────
@@ -571,6 +563,12 @@ function wbIsOverIngredient() {
   }
   return false;
 }
+function wbGetRecipeType(recipe) {
+  if (recipe === TOMATO_BREAD_RECIPE) return "tomato";
+  if (recipe === BLUEBERRY_BREAD_RECIPE) return "blueberry";
+  if (recipe === APPLE_CINNAMON_BREAD_RECIPE) return "apple";
+  return "plain";
+}
 function wbClearBowl() {
   wbContents = {};
   wbDragging = null;
@@ -662,7 +660,10 @@ function workbenchKeyPressed() {
 
 // ── Recipe check / bake ───────────────────────────────────────────────────────
 function wbCheckRecipe() {
-  if (wbRecipeComplete()) {
+  const matchedRecipe = wbGetMatchedRecipe();
+
+  if (matchedRecipe) {
+    currentBreadType = wbGetRecipeType(matchedRecipe);
     ingredientsDone = true;
     wbContents = {};
     _wbRebuildIngredients();

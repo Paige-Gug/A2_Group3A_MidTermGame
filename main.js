@@ -28,6 +28,8 @@ let money = 10;
 let game = false;
 let daytimer = 250; // timer to show the day 1 image for a few seconds before showing the home screen
 
+let currentBreadType = "plain";
+
 //NEW
 let dailyOrders = [];
 let recipeNames = ["Plain", "Tomato", "Blueberry", "Apple"];
@@ -40,7 +42,7 @@ let video;
 let openday;
 let nightvid;
 let playing = false; // track if the intro video is currently playing
-let videoFinished = false; // track if the intro video has finished playing
+let videoFinished = true; // track if the intro video has finished playing
 let ingredientsDone = false; // track if player has collected all ingredients (starts at false, becomes true when they do) --- IGNORE ---
 
 let appleCounter = 0;
