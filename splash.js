@@ -14,38 +14,47 @@
 function drawSplash() {
   game = false;
 
-  imageMode(CORNER);
-  // Background colour for the splash screen
-  image(allimg[50], 0, 0, width, height); // background image
+  if (!videoFinished) {
+    // Play the intro video
+    if (!playing) {
+      video.play();
+      playing = true;
+    }
+    image(video, 0, 0, width, height);
+  } else {
+    imageMode(CORNER);
+    // Background colour for the splash screen
+    image(allimg[50], 0, 0, width, height); // background image
 
-  // ---- Buttons (data only) ----
-  // These objects store the position/size/label for each button.
-  // Using objects makes it easy to pass them into drawButton()
-  // and also reuse the same information for hover checks.
-  const playBtn = {
-    x: 472,
-    y: 570,
-    w: 350,
-    h: 100,
-    label: "PLAY",
-  };
+    // ---- Buttons (data only) ----
+    // These objects store the position/size/label for each button.
+    // Using objects makes it easy to pass them into drawButton()
+    // and also reuse the same information for hover checks.
+    const playBtn = {
+      x: 472,
+      y: 570,
+      w: 350,
+      h: 100,
+      label: "PLAY",
+    };
 
-  const instBtn = {
-    x: 872,
-    y: 570,
-    w: 350,
-    h: 100,
-    label: "INSTRUCTIONS",
-  };
+    const instBtn = {
+      x: 872,
+      y: 570,
+      w: 350,
+      h: 100,
+      label: "INSTRUCTIONS",
+    };
 
-  // Draw all buttons
-  drawButton(playBtn);
-  drawButton(instBtn);
+    // Draw all buttons
+    drawButton(playBtn);
+    drawButton(instBtn);
 
-  // ---- Cursor feedback ----
-  // If the mouse is over the buttons, show a hand cursor so the player knows it is clickable.
-  const over = isHover(playBtn) || isHover(instBtn);
-  cursor(over ? HAND : ARROW);
+    // ---- Cursor feedback ----
+    // If the mouse is over the buttons, show a hand cursor so the player knows it is clickable.
+    const over = isHover(playBtn) || isHover(instBtn);
+    cursor(over ? HAND : ARROW);
+  }
 }
 
 // ------------------------------------------------------------
