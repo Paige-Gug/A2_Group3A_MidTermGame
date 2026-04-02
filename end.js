@@ -9,7 +9,7 @@ function drawEnd() {
   textAlign(CENTER, CENTER);
   text("Congratulations! You made:", width / 2, 280);
   text("Sourdough Bread: " + bread, width / 2, 350);
-  text("Money Earned: $" + bread * 5, width / 2, 420);
+  text("Money Earned: $" + money, width / 2, 420);
 
   const homeBtn = {
     x: width / 3,
@@ -42,5 +42,6 @@ function endMousePressed() {
     currentScreen = "home";
   } else if (isHover(sleepBtn)) {
     currentScreen = "sleep";
+    nightvid.play();
   }
 }

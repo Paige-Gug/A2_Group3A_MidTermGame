@@ -30,6 +30,7 @@ let font;
 let prevScreen = "home";
 let video;
 let openday;
+let nightvid;
 let playing = false;
 let videoFinished = true;
 let ingredientsDone = false;
@@ -95,6 +96,7 @@ function preload() {
   // Load videos
   video = createVideo("libraries/assets/intro.mp4");
   openday = createVideo("libraries/assets/day.mp4");
+  nightvid = createVideo("libraries/assets/night.mp4");
 
   // Load general audio
   ambiance = loadSound("libraries/assets/audio/ambiance.mp3");
@@ -131,6 +133,11 @@ function setup() {
   openday.elt.muted = true;
   openday.stop();
   openday.hide();
+
+  nightvid.size(width, height);
+  nightvid.elt.muted = true;
+  nightvid.stop();
+  nightvid.hide();
 
   video.hide();
   video.size(width, height);

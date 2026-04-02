@@ -9,7 +9,7 @@
 // ------------------------------
 // drawSleep() is called from main.js
 // only when currentScreen === "sleep"
-let sleepTimer = 300; // timer to show the sleep screen for a few seconds before going back to home
+let sleepTimer = 400; // timer to show the sleep screen for a few seconds before going back to home
 
 function drawSleep() {
   game = false;
@@ -19,9 +19,11 @@ function drawSleep() {
   textSize(40);
 
   if (energy > 4 && sleepTimer > 0) {
+    image(nightvid, width / 2, height / 2, width, height);
     text("One day closer to culinary school!", width / 2, height / 2);
     sleepTimer--;
   } else if (energy <= 4 && sleepTimer > 0) {
+    image(nightvid, 0, 0, width, height);
     text(
       "You are too tired to continue, you'll have to take tomorrow off.",
       width / 2,
@@ -34,10 +36,11 @@ function drawSleep() {
     );
     sleepTimer--;
   } else {
+    nightvid.stop();
     energy = int(random(85, 100));
     day++;
     currentScreen = "home";
-    sleepTimer = 300;
+    sleepTimer = 400;
     daytimer = 250;
     openday.play();
   }
