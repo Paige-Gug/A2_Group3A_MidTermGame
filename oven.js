@@ -323,19 +323,8 @@ function ovenMousePressed() {
 
       if (bakeTimer >= bakeDuration && bakeTimer <= bakeDuration + burnWindow) {
         breadDone = true;
-        if (currentBreadType === "tomato") {
-          money += 10;
-          bread += 1;
-        } else if (currentBreadType === "apple") {
-          money += 15;
-          bread += 1;
-        } else if (currentBreadType === "blueberry") {
-          money += 15;
-          bread += 1;
-        } else if (currentBreadType === "plain") {
-          money += 5;
-          bread += 1;
-        }
+        money += 10;
+        bread += 1;
       } else if (bakeTimer > bakeDuration + burnWindow) {
         breadBurnt = true;
       }
@@ -368,7 +357,6 @@ function ovenMousePressed() {
     breadInOven = false;
     breadDone = false;
     breadBurnt = false;
-    ingredientsDone = false;
     bakeTimer = 0;
     showTooEarlyMessage = false;
     breadReadyForEndScreen = false;
