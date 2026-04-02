@@ -180,7 +180,7 @@ function setup() {
   video.elt.muted = true; // Allow autoplay by muting the video
   video.onended(() => {
     videoFinished = true;
-    currentScreen = "splash"; // Ensure we switch to the home screen after the video ends
+    currentScreen = "splash"; // Ensure we switch to the splash screen after the video ends
   });
 }
 
