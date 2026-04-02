@@ -259,6 +259,13 @@ function drawWorkbench() {
   drawWbMessage();
 
   cursor(wbIsOverIngredient() ? HAND : ARROW);
+
+  if (work == false) {
+    tut = "Click on ingredients";
+    tut2 = "to mix them in the bowl";
+    prevScreen = currentScreen;
+    currentScreen = "popup";
+  }
 }
 
 // ── Trash-can button ─────────────────────────────────────────────────────────
