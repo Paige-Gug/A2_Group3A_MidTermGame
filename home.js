@@ -12,168 +12,159 @@
 // currentScreen === "home"
 
 function drawHome() {
-  if (!videoFinished) {
-    // Play the intro video
-    if (!playing) {
-      video.play();
-      playing = true;
-    }
-    image(video, 0, 0, width, height);
+  imageMode(CORNER);
+
+  if (daytimer > 0) {
+    textSize(40);
+    fill(84, 43, 20);
+    image(openday, 0, 0, width, height);
+    text("DAY " + day, 640, height / 6);
+    daytimer--;
   } else {
+    game = true;
+    openday.stop();
+
+    // Background colour for the home screen
+    image(allimg[0], 0, 0, width, height); // background image
+
+    // ---- Title text ----
+    fill(255);
+    stroke(84, 43, 20);
+    strokeWeight(5);
+    textSize(30);
+    textAlign(CENTER, CENTER);
+    text("PANTRY", 345, 190);
+    text("WORKBENCH", 700, 300);
+    text("OVEN", 1025, 190);
+
+    // ---- Buttons (data only) ----
+    // These objects store the position/size/label for each button.
+    // Using objects makes it easy to pass them into drawButton()
+    // and also reuse the same information for hover checks.
+    const pantryBtn = {
+      x: 345,
+      y: 440,
+      w: 370,
+      h: 520,
+      label: "",
+    };
+
+    const workBtn = {
+      x: 711,
+      y: 544,
+      w: 437,
+      h: 290,
+      label: "",
+    };
+
+    const ovenBtn = {
+      x: 1025,
+      y: 522,
+      w: 297,
+      h: 345,
+      label: "",
+    };
+
+    const shopBtn = {
+      x: 100,
+      y: height - 100,
+      w: 100,
+      h: 100,
+      label: "",
+    };
+
+    // Draw all buttons
+    drawButton(pantryBtn);
+    drawButton(workBtn);
+    drawButton(ovenBtn);
+
+    if (day >= 2) {
+      drawButton(shopBtn);
+      image(allimg[57], 25, height - 150, 125, 125); // shop icon
+    }
+
+    // show pantry image when hovered
+    imageMode(CENTER);
+    if (isHover(pantryBtn)) {
+      image(allimg[1], 345, 440, 370, 520);
+    } else if (isHover(ovenBtn)) {
+      image(allimg[2], 1025, 522, 297, 345);
+    } else if (isHover(workBtn)) {
+      image(allimg[33], 711, 544, 437, 290);
+    }
+
+    // ---- Cursor feedback ----
+    // If the mouse is over the buttons, show a hand cursor so the player knows it is clickable.
+    const over =
+      isHover(workBtn) ||
+      isHover(pantryBtn) ||
+      isHover(ovenBtn) ||
+      isHover(shopBtn);
+    cursor(over ? HAND : ARROW);
+
+    // ------------------------------
+    // Order tickets (left side, stacked upward)
+    // ------------------------------
+    let orderW = 130;
+    let orderH = 130;
+    let orderGap = 0;
+
+    // left side position
+    let startX = 10;
+
+    // this is the BOTTOM ticket position
+    let bottomY = height / 2 + 50;
+
     imageMode(CORNER);
+    textAlign(CENTER, CENTER);
+    textSize(16);
+    fill(84, 43, 20);
+    noStroke();
 
-    if (daytimer > 0) {
-      textSize(40);
-      fill(84, 43, 20);
-      image(openday, 0, 0, width, height);
-      text("DAY " + day, 640, height / 6);
-      daytimer--;
-    } else {
-      game = true;
-      openday.stop();
+    for (let i = 0; i < 3; i++) {
+      let x = startX;
+      let y = bottomY - i * (orderH + orderGap);
 
-      // Background colour for the home screen
-      image(allimg[0], 0, 0, width, height); // background image
+      let recipeIndex = dailyOrders[i];
+      let breadImgIndex = getRecipeImageIndex(recipeIndex);
+      let flavourName = recipeNames[recipeIndex];
 
-      // ---- Title text ----
-      fill(255);
-      stroke(84, 43, 20);
-      strokeWeight(5);
-      textSize(30);
-      textAlign(CENTER, CENTER);
-      text("PANTRY", 345, 190);
-      text("WORKBENCH", 700, 300);
-      text("OVEN", 1025, 190);
+      // sticky note background
+      image(allimg[59], x, y, orderW, orderH);
 
-      // ---- Buttons (data only) ----
-      // These objects store the position/size/label for each button.
-      // Using objects makes it easy to pass them into drawButton()
-      // and also reuse the same information for hover checks.
-      const pantryBtn = {
-        x: 345,
-        y: 440,
-        w: 370,
-        h: 520,
-        label: "",
-      };
-
-      const workBtn = {
-        x: 711,
-        y: 544,
-        w: 437,
-        h: 290,
-        label: "",
-      };
-
-      const ovenBtn = {
-        x: 1025,
-        y: 522,
-        w: 297,
-        h: 345,
-        label: "",
-      };
-
-      const shopBtn = {
-        x: 100,
-        y: height - 100,
-        w: 100,
-        h: 100,
-        label: "",
-      };
-
-      // Draw all buttons
-      drawButton(pantryBtn);
-      drawButton(workBtn);
-      drawButton(ovenBtn);
-
-      if (day >= 2) {
-        drawButton(shopBtn);
-        image(allimg[57], 25, height - 150, 125, 125); // shop icon
-      }
-
-      // show pantry image when hovered
+      // bread image top middle
       imageMode(CENTER);
-      if (isHover(pantryBtn)) {
-        image(allimg[1], 345, 440, 370, 520);
-      } else if (isHover(ovenBtn)) {
-        image(allimg[2], 1025, 522, 297, 345);
-      } else if (isHover(workBtn)) {
-        image(allimg[33], 711, 544, 437, 290);
-      }
+      image(allimg[breadImgIndex], x + orderW / 2, y + 65, 100, 70);
 
-      // ---- Cursor feedback ----
-      // If the mouse is over the buttons, show a hand cursor so the player knows it is clickable.
-      const over =
-        isHover(workBtn) ||
-        isHover(pantryBtn) ||
-        isHover(ovenBtn) ||
-        isHover(shopBtn);
-      cursor(over ? HAND : ARROW);
-
-      // ------------------------------
-      // Order tickets (left side, stacked upward)
-      // ------------------------------
-      let orderW = 130;
-      let orderH = 130;
-      let orderGap = 0;
-
-      // left side position
-      let startX = 10;
-
-      // this is the BOTTOM ticket position
-      let bottomY = height / 2 + 50;
-
+      // flavour name underneath
       imageMode(CORNER);
       textAlign(CENTER, CENTER);
-      textSize(16);
+      textSize(14);
       fill(84, 43, 20);
       noStroke();
+      text(flavourName, x + orderW / 2, y + 108);
+    }
 
-      for (let i = 0; i < 3; i++) {
-        let x = startX;
-        let y = bottomY - i * (orderH + orderGap);
+    if (inst == false) {
+      tut = "Click on recipe instructions ";
+      tut2 = "to find out what to bake!";
+      prevScreen = currentScreen;
+      currentScreen = "popup";
+    }
 
-        let recipeIndex = dailyOrders[i];
-        let breadImgIndex = getRecipeImageIndex(recipeIndex);
-        let flavourName = recipeNames[recipeIndex];
-
-        // sticky note background
-        image(allimg[59], x, y, orderW, orderH);
-
-        // bread image top middle
-        imageMode(CENTER);
-        image(allimg[breadImgIndex], x + orderW / 2, y + 65, 100, 70);
-
-        // flavour name underneath
-        imageMode(CORNER);
-        textAlign(CENTER, CENTER);
-        textSize(14);
-        fill(84, 43, 20);
-        noStroke();
-        text(flavourName, x + orderW / 2, y + 108);
-      }
-
-      if (inst == false) {
-        tut = "Click on recipe instructions ";
-        tut2 = "to find out what to bake!";
-        prevScreen = currentScreen;
-        currentScreen = "popup";
-      }
-
-      if (
-        eng == false &&
-        inst == true &&
-        recp == true &&
-        pan == true &&
-        work == true &&
-        ovn == true
-      ) {
-        tut = "Watch your energy carefully,";
-        tut2 = "and go to sleep when it gets low!";
-        tut3 = "Good luck!";
-        prevScreen = currentScreen;
-        currentScreen = "popup";
-      }
+    if (
+      eng == false &&
+      inst == true &&
+      recp == true &&
+      pan == true &&
+      work == true &&
+      ovn == true
+    ) {
+      tut = "Watch your energy carefully,";
+      tut2 = "and go to sleep when it gets low!";
+      tut3 = "Good luck!";
+      prevScreen = currentScreen;
+      currentScreen = "popup";
     }
   }
 }
