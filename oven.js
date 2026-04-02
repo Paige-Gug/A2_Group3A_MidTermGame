@@ -38,18 +38,18 @@ function drawOven() {
   ovenBakingImg = allimg[32];
   ovenOpenImg = allimg[2];
   breadImg = allimg[17];
-  bakedBreadImg = getFinishedBreadImage();
+  bakedBreadImg = allimg[15];
   burntBreadImg = allimg[43];
   ovenBackground = allimg[31];
   counterImg = allimg[48];
 
   // ------------------------------
-  // Determine temperatures based on level
+  // Determine temperatures based on day
   // ------------------------------
   let temps;
-  if (level === 1) temps = [150, 200, 250];
-  else if (level === 2) temps = [150, 175, 200, 225];
-  else if (level === 3) temps = [150, 175, 200, 225, 250];
+  if (day === 1) temps = [150, 200, 250];
+  else if (day === 2) temps = [150, 175, 200, 225];
+  else if (day === 3) temps = [150, 175, 200, 225, 250];
   else temps = [150, 200, 250]; // fallback
 
   // Adjust bakeDuration and burnTime based on selectedTemp
@@ -68,12 +68,6 @@ function drawOven() {
   } else {
     bakeDuration = 180;
     burnTime = 180;
-  }
-  function getFinishedBreadImage() {
-    if (currentBreadType === "tomato") return allimg[60];
-    if (currentBreadType === "apple") return allimg[61];
-    if (currentBreadType === "blueberry") return allimg[62];
-    return allimg[15];
   }
 
   // ------------------------------
@@ -248,9 +242,9 @@ function ovenMousePressed() {
     mouseY < tempY + tempHeight / 2
   ) {
     let temps;
-    if (level === 1) temps = [150, 200, 250];
-    else if (level === 2) temps = [150, 175, 200, 225];
-    else if (level === 3) temps = [150, 175, 200, 225, 250];
+    if (day === 1) temps = [150, 200, 250];
+    else if (day === 2) temps = [150, 175, 200, 225];
+    else if (day === 3) temps = [150, 175, 200, 225, 250];
     else temps = [150, 200, 250];
 
     let currentIndex = temps.indexOf(selectedTemp);
@@ -356,6 +350,7 @@ function ovenMousePressed() {
     // Reset state
     breadInOven = false;
     breadDone = false;
+    ingredientsDone = false; // reset for next recipe
     breadBurnt = false;
     bakeTimer = 0;
     showTooEarlyMessage = false;
