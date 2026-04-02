@@ -4,37 +4,31 @@
 // 1) drawOven() → what the oven screen looks like
 // 2) input handlers → how the player returns to the start screen
 
-
 // ------------------------------------------------------------
 // Main draw function for oven screen
 // ------------------------------------------------------------
 // drawOven() is called from main.js
 // only when currentScreen === "oven"
 
-
-
-
 let warningMessage = "You need to complete all ingredients first!"; //"You need to complete all ingredients first!"; // warning if ingredients not ready
-
 
 let breadDoneTimer = 0; // counts frames after baking finishes
 let breadDoneDelay = 100; // show baked bread for 2 seconds (120 frames at 60 FPS)
 let showWarning = false;
 
-
 let breadInOven = false;
-let breadDone = false;     // perfectly baked
-let breadBurnt = false;    // burnt
-let bakeTimer = 0;         // counts frames while in oven
-let bakeDuration = 300;    // perfect bake time
-let burnTime = 420;        // time at which bread burns if left
+let breadDone = false; // perfectly baked
+let breadBurnt = false; // burnt
+let bakeTimer = 0; // counts frames while in oven
+let bakeDuration = 300; // perfect bake time
+let burnTime = 420; // time at which bread burns if left
 let showTooEarlyMessage = false; // flag for "not done baking"
 
 let breadReadyForEndScreen = false;
 let showClickBreadText;
-let minTemp = 180;        // Minimum oven temp
-let maxTemp = 250;        // Maximum oven temp
-let selectedTemp = 150;   // Current oven temp (default)
+let minTemp = 180; // Minimum oven temp
+let maxTemp = 250; // Maximum oven temp
+let selectedTemp = 150; // Current oven temp (default)
 
 function drawOven() {
   // ------------------------------
@@ -50,12 +44,12 @@ function drawOven() {
   counterImg = allimg[48];
 
   // ------------------------------
-  // Determine temperatures based on level
+  // Determine temperatures based on day
   // ------------------------------
   let temps;
-  if (level === 1) temps = [150, 200, 250];
-  else if (level === 2) temps = [150, 175, 200, 225];
-  else if (level === 3) temps = [150, 175, 200, 225, 250];
+  if (day === 1) temps = [150, 200, 250];
+  else if (day === 2) temps = [150, 175, 200, 225];
+  else if (day === 3) temps = [150, 175, 200, 225, 250];
   else temps = [150, 200, 250]; // fallback
 
   // Adjust bakeDuration and burnTime based on selectedTemp
@@ -178,9 +172,7 @@ function drawOven() {
     }
 
     image(bakedBreadImg, width / 2 - 30, ovenY + 35, 220, 140);
-
   } else if (breadDone || breadBurnt) {
-
     if (breadDone) {
       image(bakedBreadImg, width / 2 - 30, ovenY + 5, 220, 140);
       textSize(50);
@@ -198,7 +190,6 @@ function drawOven() {
     text("Click bread to continue", width / 2 - 30, 205);
 
     breadReadyForEndScreen = true;
-
   } else if (ingredientsDone) {
     // Only show raw bread on counter if ingredients are done
     image(breadImg, breadX, breadY, 220, 140);
@@ -251,9 +242,9 @@ function ovenMousePressed() {
     mouseY < tempY + tempHeight / 2
   ) {
     let temps;
-    if (level === 1) temps = [150, 200, 250];
-    else if (level === 2) temps = [150, 175, 200, 225];
-    else if (level === 3) temps = [150, 175, 200, 225, 250];
+    if (day === 1) temps = [150, 200, 250];
+    else if (day === 2) temps = [150, 175, 200, 225];
+    else if (day === 3) temps = [150, 175, 200, 225, 250];
     else temps = [150, 200, 250];
 
     let currentIndex = temps.indexOf(selectedTemp);
@@ -359,6 +350,7 @@ function ovenMousePressed() {
     // Reset state
     breadInOven = false;
     breadDone = false;
+    ingredientsDone = false; // reset for next recipe
     breadBurnt = false;
     bakeTimer = 0;
     showTooEarlyMessage = false;
