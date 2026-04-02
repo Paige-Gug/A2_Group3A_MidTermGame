@@ -19,7 +19,7 @@
 let currentScreen = "splash"; // "home" | "pantry" | "workbench" | "oven" | "recipe"
 let bread = 0;
 let energy = 90;
-let day = 1;
+let day = 2;
 let money = 10;
 let game = false;
 let daytimer = 250; // timer to show the day 1 image for a few seconds before showing the home screen
@@ -51,7 +51,6 @@ let flourCounter = 0;
 let waterCounter = 0;
 let starterCounter = 0;
 let saltCounter = 0;
-
 let appleCounter = 0;
 let blueberryCounter = 0;
 let cinnamonCounter = 0;
@@ -71,12 +70,20 @@ let ding;
 let swoosh;
 let timer;
 let trash;
-
 let Flour;
 let Water;
 let Starter;
 let Salt;
 let Kneading;
+
+// Tool upgrades
+let pin = false;
+let standmixer = false;
+let goldenoven = false;
+
+// ------------------------------------------------------------
+// Preload assets and setup the canvas
+// ------------------------------------------------------------
 
 function preload() {
   // Load all images

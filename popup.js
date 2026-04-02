@@ -8,8 +8,8 @@ function drawPopup() {
   text(tut3, width / 2, height / 2 + 60);
 
   const exitBtn = {
-    x: 870,
-    y: 150,
+    x: 970,
+    y: 200,
     w: 30,
     h: 30,
     label: "X",
@@ -20,7 +20,7 @@ function drawPopup() {
 }
 
 function popupMousePressed() {
-  const exitBtn = { x: 870, y: 150, w: 30, h: 30 };
+  const exitBtn = { x: 970, y: 200, w: 30, h: 30 };
 
   if (isHover(exitBtn) && prevScreen == "home" && inst == false) {
     inst = true; // Mark the recipe tutorial as completed
