@@ -179,6 +179,9 @@ function pantryMousePressed() {
     if (clicked) {
       incrementIngredientCounter(ingredient.counterName);
       energy -= int(random(1, 3));
+      click.setVolume(2);
+      click.stop();
+      click.play();
     }
   }
 }

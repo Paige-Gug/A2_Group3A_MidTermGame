@@ -60,6 +60,8 @@ function drawSleep() {
     }
     energy = int(random(85, 100));
     sleepTimer = 400;
+    generateOrdersForDay();
+    recipePage = 0;
     daytimer = 250;
     openday.play();
   }
