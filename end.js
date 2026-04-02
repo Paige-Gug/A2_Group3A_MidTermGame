@@ -34,14 +34,13 @@ function drawEnd() {
 }
 
 function endMousePressed() {
-  // For input checks, we only need x,y,w,h (label is optional)
   const homeBtn = { x: width / 3, y: 570, w: 340, h: 100 };
   const sleepBtn = { x: width - width / 3, y: 570, w: 340, h: 100 };
 
-  // If home button is clicked, go to the home screen
   if (isHover(homeBtn)) {
     currentScreen = "home";
   } else if (isHover(sleepBtn)) {
+    wbClearBowl();
     currentScreen = "sleep";
     nightvid.play();
   }

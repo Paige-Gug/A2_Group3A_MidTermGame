@@ -50,7 +50,7 @@ let sugarCounter = 0;
 let tomatoCounter = 0;
 let recipePage = 0;
 const LAST_RECIPE_PAGE = 3;
-recipeClicked = false;
+let recipeClicked = false;
 
 // Tutorial popups
 let tut;
@@ -78,6 +78,11 @@ let ding;
 let swoosh;
 let timer;
 let trash;
+let Flour;
+let Water;
+let Starter;
+let Salt;
+let Kneading;
 
 // Tool upgrades
 let pin = false;
@@ -103,6 +108,11 @@ function preload() {
   swoosh = loadSound("libraries/assets/audio/swoosh.mp3");
   timer = loadSound("libraries/assets/audio/timer.mp3");
   trash = loadSound("libraries/assets/audio/trash.mp3");
+  Flour = loadSound("libraries/assets/audio/Flour.mp3");
+  Water = loadSound("libraries/assets/audio/Water.mp3");
+  Starter = loadSound("libraries/assets/audio/Starter.mp3");
+  Salt = loadSound("libraries/assets/audio/Salt.mp3");
+  Kneading = loadSound("libraries/assets/audio/Kneeding_Dough.mp3");
 
   // Load a custom font before the sketch starts
   font = loadFont("libraries/assets/font/playpen.ttf");
@@ -217,17 +227,18 @@ function draw() {
 // ------------------------------
 // This routes mouse input to the correct screen handler.
 function mousePressed() {
-  // Each screen *may* define a mouse handler:
-  // home.js         → homeMousePressed()
-  // pantry.js       → pantryMousePressed()
-  // workbench.js     → workbenchMousePressed()
-  // oven.js          → ovenMousePressed()
-  // recipe.js          → recipeMousePressed()
-  // end.js          → endMousePressed()
-  // popup.js         → popupMousePressed()
+  userStartAudio();
 
-  if (currentScreen === "splash") splashMousePressed();
-  else if (currentScreen === "instructions") instructionsMousePressed();
+  if (currentScreen === "splash") {
+    splashMousePressed();
+    return;
+  }
+
+  if (currentScreen === "home" && daytimer > 0) {
+    return;
+  }
+
+  if (currentScreen === "instructions") instructionsMousePressed();
   else if (currentScreen === "home") homeMousePressed();
   else if (currentScreen === "popup") popupMousePressed();
   else if (currentScreen === "pantry") pantryMousePressed();
@@ -238,7 +249,9 @@ function mousePressed() {
   else if (currentScreen === "end") endMousePressed();
   else if (currentScreen === "sleep") sleepMousePressed();
 
-  navbarMousePressed();
+  if (!(currentScreen === "home" && daytimer > 0)) {
+    navbarMousePressed();
+  }
 }
 
 // ------------------------------

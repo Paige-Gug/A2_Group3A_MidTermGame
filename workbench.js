@@ -3,13 +3,14 @@
 // ------------------------------
 //
 // Image assets used (loaded in main.js preload via allimg[]):
-//   allimg[31] → background (31.png)
-//   allimg[14] → workbench table (14.png)
-//   allimg[8]  → empty bowl (8.png)
-//   allimg[9]  → bowl with dough (9.png)
+//   allimg[31] -> background (31.png)
+//   allimg[14] -> workbench table (14.png)
+//   allimg[8]  -> empty bowl (8.png)
+//   allimg[9]  -> bowl with dough (9.png)
 
 // ── Recipes ─────────────────────────────────────────────────────────────────
 const BREAD_RECIPE = { flour: 3, water: 2, starter: 1, salt: 1 };
+const MILK_BREAD_RECIPE = { flour: 4, water: 1, starter: 2, salt: 1 };
 const TOMATO_BREAD_RECIPE = {
   flour: 3,
   water: 2,
@@ -25,7 +26,6 @@ const BLUEBERRY_BREAD_RECIPE = {
   blueberry: 3,
   sugar: 2,
 };
-
 const APPLE_CINNAMON_BREAD_RECIPE = {
   flour: 3,
   water: 2,
@@ -35,10 +35,31 @@ const APPLE_CINNAMON_BREAD_RECIPE = {
   cinnamon: 1,
 };
 
-// Returns the active recipe object based on current day and level.
+// Returns the recipe shown by default in the recipe card.
 function wbActiveRecipe() {
+  if (day >= 5) return BLUEBERRY_BREAD_RECIPE;
   if (day >= 2) return TOMATO_BREAD_RECIPE;
   return level >= 2 ? MILK_BREAD_RECIPE : BREAD_RECIPE;
+}
+
+function wbActiveRecipeName() {
+  if (day >= 5) return "🫐 BLUEBERRY CRUMBLE";
+  if (day >= 2) return "🍅 TOMATO BREAD";
+  return level >= 2 ? "🥛 MILK BREAD" : "🍞 SOURDOUGH";
+}
+
+function wbAllRecipes() {
+  const recipes = [BREAD_RECIPE, MILK_BREAD_RECIPE];
+
+  if (day >= 2) {
+    recipes.push(TOMATO_BREAD_RECIPE);
+  }
+
+  if (day >= 5) {
+    recipes.push(BLUEBERRY_BREAD_RECIPE, APPLE_CINNAMON_BREAD_RECIPE);
+  }
+
+  return recipes;
 }
 
 // ── Level thresholds ─────────────────────────────────────────────────────────
@@ -119,41 +140,74 @@ function _wbRebuildIngredients() {
     names.push("blueberry", "sugar", "cinnamon", "apple");
   }
 
+  const useTwoRows = day >= 5;
   const spacing = 130;
-  const startX = width / 2 - ((names.length - 1) * spacing) / 2;
-  const rowY = height * 0.74;
+  const topRowY = height * 0.6;
+  const bottomRowY = height * 0.77;
 
-  names.forEach((name, i) => {
-    const available =
-      {
-        flour: flourCounter,
-        water: waterCounter,
-        starter: starterCounter,
-        salt: saltCounter,
-        tomato: tomatoCounter,
-        blueberry: blueberryCounter,
-        sugar: sugarCounter,
-        cinnamon: cinnamonCounter,
-        apple: appleCounter,
-      }[name] || 0;
+  let rows;
+  if (useTwoRows) {
+    rows = [names.slice(0, 5), names.slice(5)];
+  } else {
+    rows = [names];
+  }
 
-    wbIngredients.push({
-      name,
-      x: startX + i * spacing,
-      y: rowY,
-      w: 100,
-      h: 100,
-      count: available,
+  rows.forEach((rowNames, rowIndex) => {
+    const startX = width / 2 - ((rowNames.length - 1) * spacing) / 2;
+    const rowY = rowIndex === 0 ? topRowY : bottomRowY;
+
+    rowNames.forEach((name, i) => {
+      const available =
+        {
+          flour: flourCounter,
+          water: waterCounter,
+          starter: starterCounter,
+          salt: saltCounter,
+          tomato: tomatoCounter,
+          blueberry: blueberryCounter,
+          sugar: sugarCounter,
+          cinnamon: cinnamonCounter,
+          apple: appleCounter,
+        }[name] || 0;
+
+      wbIngredients.push({
+        name,
+        x: startX + i * spacing,
+        y: rowY,
+        w: 100,
+        h: 100,
+        count: available,
+      });
     });
   });
 }
 
 // ── Recipe helpers ───────────────────────────────────────────────────────────
-function wbRecipeComplete() {
-  const recipe = wbActiveRecipe();
-  return Object.entries(recipe).every(
-    ([name, needed]) => (wbContents[name] || 0) >= needed,
+function wbMatchesRecipe(recipe) {
+  const bowlKeys = Object.keys(wbContents).filter(
+    (name) => (wbContents[name] || 0) > 0,
   );
+  const recipeKeys = Object.keys(recipe);
+
+  if (bowlKeys.length !== recipeKeys.length) return false;
+
+  for (const [name, needed] of Object.entries(recipe)) {
+    if ((wbContents[name] || 0) !== needed) return false;
+  }
+
+  return true;
+}
+
+function wbGetMatchedRecipe() {
+  const recipes = wbAllRecipes();
+  for (const recipe of recipes) {
+    if (wbMatchesRecipe(recipe)) return recipe;
+  }
+  return null;
+}
+
+function wbRecipeComplete() {
+  return wbGetMatchedRecipe() !== null;
 }
 
 // ── Main draw ────────────────────────────────────────────────────────────────
@@ -174,6 +228,11 @@ function drawWorkbench() {
   const wbImgH = wbImgW * (9 / 16);
   const wbImgY = height * 0.62;
   if (allimg[14]) image(allimg[14], width / 2, wbImgY, wbImgW, wbImgH);
+
+  if (pin && allimg[55]) {
+    imageMode(CENTER);
+    image(allimg[55], width / 2 - 250, wbImgY - 180, 180, 90);
+  }
 
   const counterY = wbImgY - wbImgH * 0.41;
   wbBowl.x = width / 2 - 15;
@@ -209,7 +268,13 @@ function drawWbTrashButton() {
   wbTrashBtn = { x: width - 170, y: height - 220, w, h };
   const hover = isHover(wbTrashBtn);
 
-  if (hover && !wbTrashHovering && trash) {
+  if (
+    hover &&
+    !wbTrashHovering &&
+    trash &&
+    typeof trash.isLoaded === "function" &&
+    trash.isLoaded()
+  ) {
     trash.stop();
     trash.play();
   }
@@ -359,17 +424,12 @@ function _drawWbBowlFallback() {
 // ── Recipe card ───────────────────────────────────────────────────────────────
 function drawWbRecipe() {
   const recipe = wbActiveRecipe();
-  const recipeName =
-    day >= 2
-      ? "🍅 TOMATO BREAD"
-      : level >= 2
-        ? "🥛 MILK BREAD"
-        : "🍞 SOURDOUGH";
+  const recipeName = wbActiveRecipeName();
 
   const x = width - 200;
   const y = 110;
   const w = 165;
-  const h = 215;
+  const h = 255;
 
   rectMode(CORNER);
   fill(255, 248, 215);
@@ -405,7 +465,7 @@ function drawWbRecipe() {
     fill(done ? color(50, 140, 50) : color(180, 60, 60));
     textAlign(RIGHT, TOP);
     text(`${have}/${needed}`, x + w - 10, ty);
-    ty += 40;
+    ty += 36;
   }
 }
 
@@ -503,7 +563,13 @@ function wbIsOverIngredient() {
   }
   return false;
 }
-
+function wbClearBowl() {
+  wbContents = {};
+  wbDragging = null;
+  wbMessage = "";
+  wbMessageTimer = 0;
+  _wbRebuildIngredients();
+}
 // ── Input handlers ────────────────────────────────────────────────────────────
 function workbenchMousePressed() {
   if (isHover(wbTrashBtn)) {
@@ -535,26 +601,37 @@ function workbenchMousePressed() {
         cinnamonCounter = max(0, cinnamonCounter - 1);
       else if (ing.name === "apple") appleCounter = max(0, appleCounter - 1);
 
-      if (ing.name === "flour" && Flour) {
-        Flour.stop();
-        Flour.play();
-      } else if (ing.name === "water" && Water) {
-        Water.stop();
-        Water.play();
-      } else if (ing.name === "starter" && Starter) {
-        Starter.stop();
-        Starter.play();
-      } else if (ing.name === "salt" && Salt) {
-        Salt.stop();
-        Salt.play();
+      let ingredientSound = null;
+      if (ing.name === "flour") ingredientSound = Flour;
+      else if (ing.name === "water") ingredientSound = Water;
+      else if (ing.name === "starter") ingredientSound = Starter;
+      else if (ing.name === "salt") ingredientSound = Salt;
+
+      if (
+        ingredientSound &&
+        typeof ingredientSound.isLoaded === "function" &&
+        ingredientSound.isLoaded()
+      ) {
+        ingredientSound.stop();
+        ingredientSound.play();
       }
 
-      if (wbRecipeComplete() && Kneading) {
+      if (
+        wbRecipeComplete() &&
+        Kneading &&
+        typeof Kneading.isLoaded === "function" &&
+        Kneading.isLoaded()
+      ) {
         Kneading.stop();
         Kneading.play();
       }
 
-      const energyLoss = floor(random(1, 4));
+      let energyLoss = floor(random(1, 4));
+
+      if (pin) {
+        energyLoss = max(1, energyLoss - 1);
+      }
+
       energy = max(0, energy - energyLoss);
 
       wbMessage = `Added ${INGREDIENT_STYLES[ing.name].emoji} ${INGREDIENT_STYLES[ing.name].label}! (-${energyLoss} ⚡)`;
@@ -577,35 +654,14 @@ function workbenchKeyPressed() {
 
 // ── Recipe check / bake ───────────────────────────────────────────────────────
 function wbCheckRecipe() {
-  const recipe = wbActiveRecipe();
-
-  const missing = [];
-  const excess = [];
-
-  for (const [name, needed] of Object.entries(recipe)) {
-    const have = wbContents[name] || 0;
-    if (have < needed) missing.push(INGREDIENT_STYLES[name].label);
-    else if (have > needed) excess.push(INGREDIENT_STYLES[name].label);
-  }
-
-  for (const name of Object.keys(wbContents)) {
-    if ((wbContents[name] || 0) > 0 && recipe[name] === undefined) {
-      excess.push(INGREDIENT_STYLES[name]?.label || name);
-    }
-  }
-
-  if (missing.length === 0 && excess.length === 0) {
+  if (wbRecipeComplete()) {
     ingredientsDone = true;
     wbContents = {};
     _wbRebuildIngredients();
     currentScreen = "oven";
-  } else if (missing.length > 0) {
-    wbMessage = "Wrong ingredients! Keep trying.";
-    wbMessageTimer = 140;
-  } else {
-    const penalty = floor(random(4, 8));
-    energy = max(0, energy - penalty);
-    wbMessage = `Wrong ingredients! (-${penalty} ⚡)`;
-    wbMessageTimer = 140;
+    return;
   }
+
+  wbMessage = "Wrong ingredients! Keep trying.";
+  wbMessageTimer = 140;
 }
