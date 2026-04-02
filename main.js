@@ -168,7 +168,7 @@ function draw() {
     drawNavbar();
   }
 
-  if (energy <= 4) {
+  if (energy <= 4 || money == 400) {
     currentScreen = "sleep";
   }
 }
