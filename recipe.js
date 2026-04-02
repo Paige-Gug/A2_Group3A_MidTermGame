@@ -47,8 +47,8 @@ function drawRecipe() {
     textSize(40);
     text("Plain Sourdough", 240, 220);
     textSize(25);
-    text("Today we are making my", 240, 300);
-    text("favourite sourdough bread!", 240, 335);
+    text("Today we are making", 240, 300);
+    text("sourdough bread!", 240, 335);
 
     text("We have multiple orders,", 240, 400);
     text("but we might not be able", 240, 435);
@@ -69,7 +69,7 @@ function drawRecipe() {
     text("Combine all the ingredients", 760, 555);
     text("on the workbench, then", 760, 590);
     text("bake the dough in the oven", 760, 625);
-    text("at 175°C.", 760, 660);
+    text("at 200°C for 6-8 seconds.", 760, 660);
   }
 
   // ------------------------------
@@ -95,7 +95,7 @@ function drawRecipe() {
     text("- Tomatoes: " + tomatoCounter + "/2", 760, 455);
 
     text("Combine all ingredients,", 760, 610);
-    text("bake at 175°C.", 760, 645);
+    text("bake at 200°C for 6-8 seconds.", 760, 645);
   }
 
   // ------------------------------
@@ -122,7 +122,7 @@ function drawRecipe() {
     text("- Sugar: " + sugarCounter + "/2", 760, 505);
 
     text("Combine all ingredients,", 760, 610);
-    text("bake at 175°C.", 760, 645);
+    text("bake at 200°C for 6-8 seconds.", 760, 645);
   }
 
   // ------------------------------
@@ -150,7 +150,7 @@ function drawRecipe() {
     text("- Sugar: " + sugarCounter + "/2", 760, 555);
 
     text("Combine all ingredients,", 760, 610);
-    text("bake at 175°C.", 760, 645);
+    text("bake at 200°C for 6-8 seconds.", 760, 645);
   }
 
   //page number
