@@ -642,7 +642,11 @@ function workbenchMousePressed() {
 
       energy = max(0, energy - energyLoss);
 
+<<<<<<< HEAD
       wbMessage = `Added ${INGREDIENT_STYLES[ing.name].emoji} ${INGREDIENT_STYLES[ing.name].label}! (-${energyLoss} ⚡)`;
+=======
+      wbMessage = `Added ${INGREDIENT_STYLES[ing.name].emoji} ${INGREDIENT_STYLES[ing.name].label}! (-1 energy)`;
+>>>>>>> parent of 425b044 (Update workbench.js)
       wbMessageTimer = 80;
       return;
     }
@@ -662,10 +666,21 @@ function workbenchKeyPressed() {
 
 // ── Recipe check / bake ───────────────────────────────────────────────────────
 function wbCheckRecipe() {
+<<<<<<< HEAD
   if (wbRecipeComplete()) {
     ingredientsDone = true;
     wbContents = {};
     _wbRebuildIngredients();
+=======
+  const missing = [],
+    excess = [];
+  for (const [name, needed] of Object.entries(BREAD_RECIPE)) {
+    const have = wbContents[name] || 0;
+    if (have < needed) missing.push(INGREDIENT_STYLES[name].label);
+    else if (have > needed) excess.push(INGREDIENT_STYLES[name].label);
+  }
+  if (missing.length === 0 && excess.length === 0) {
+>>>>>>> parent of 425b044 (Update workbench.js)
     currentScreen = "oven";
     return;
   }
