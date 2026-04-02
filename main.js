@@ -181,7 +181,11 @@ function setup() {
   video.onended(() => {
     videoFinished = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
     currentScreen = "home"; // Ensure we switch to the home screen after the video ends
+=======
+    currentScreen = "splash"; // Ensure we switch to the home screen after the video ends
+>>>>>>> parent of bd0261d (Update main.js)
 =======
     currentScreen = "splash"; // Ensure we switch to the home screen after the video ends
 >>>>>>> parent of bd0261d (Update main.js)
