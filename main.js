@@ -121,7 +121,7 @@ function preload() {
 // ------------------------------
 function setup() {
   createCanvas(1344, 756);
-  energy = int(random(70, 98));
+  energy = int(random(85, 100));
   fill(84, 43, 20);
   textFont(font);
 
