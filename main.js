@@ -40,7 +40,7 @@ let video;
 let openday;
 let nightvid;
 let playing = false; // track if the intro video is currently playing
-let videoFinished = false; // track if the intro video has finished playing
+let videoFinished = true; // track if the intro video has finished playing
 let ingredientsDone = false; // track if player has collected all ingredients (starts at false, becomes true when they do) --- IGNORE ---
 
 let appleCounter = 0;
@@ -180,7 +180,7 @@ function setup() {
   video.elt.muted = true; // Allow autoplay by muting the video
   video.onended(() => {
     videoFinished = true;
-    currentScreen = "splash"; // Ensure we switch to the home screen after the video ends
+    currentScreen = "home"; // Ensure we switch to the home screen after the video ends
   });
 }
 
